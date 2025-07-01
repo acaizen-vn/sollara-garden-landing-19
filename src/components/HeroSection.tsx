@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -92,7 +93,7 @@ const HeroSection = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `linear-gradient(rgba(62, 44, 35, 0.4), rgba(42, 27, 20, 0.6)), url('${heroBackgroundImage || '/lovable-uploads/318e54c2-e94e-4b91-a4ed-5f6aeade3dbb.png'}')`
+          backgroundImage: `linear-gradient(rgba(62, 44, 35, 0.4), rgba(42, 27, 20, 0.6)), url('/lovable-uploads/318e54c2-e94e-4b91-a4ed-5f6aeade3dbb.png')`
         }}
       />
       
@@ -104,7 +105,7 @@ const HeroSection = () => {
             <img 
               src="/lovable-uploads/c67509dc-b8fd-4b63-a711-7737584ea409.png" 
               alt="Sollara Garden Logo"
-              className="mx-auto h-56 md:h-64 lg:h-72 w-auto drop-shadow-2xl"
+              className="mx-auto h-64 md:h-72 lg:h-80 w-auto drop-shadow-2xl"
             />
           </div>
           
