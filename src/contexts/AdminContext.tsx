@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 interface CarouselImage {
@@ -60,8 +61,8 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [heroTitle, setHeroTitle] = useState('SOLLARA GARDEN');
   const [heroSubtitle, setHeroSubtitle] = useState('BARRA MANSA');
   const [heroDescription, setHeroDescription] = useState('NOVIDADE NA REGIÃO SUL FLUMINENSE');
-  const [heroVideoUrl, setHeroVideoUrl] = useState('');
-  const [heroVideoType, setHeroVideoType] = useState<'file' | 'youtube'>('file');
+  const [heroVideoUrl, setHeroVideoUrl] = useState('https://youtu.be/5yVlGgId68A?si=pOia_pnWmU6neGtl');
+  const [heroVideoType, setHeroVideoType] = useState<'file' | 'youtube'>('youtube');
   const [heroBackgroundImage, setHeroBackgroundImage] = useState('');
 
   // Footer State
