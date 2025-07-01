@@ -1,72 +1,16 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Image as ImageIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAdmin } from '@/contexts/AdminContext';
-
-// Imagens padrão do Sollara Garden
-const defaultImages = [
-  {
-    id: 'default-1',
-    url: '/lovable-uploads/3e057a4c-5472-43d1-9559-aed684c23b2b.png',
-    alt: 'Casas modernas do Sollara Garden - Vista frontal das residências'
-  },
-  {
-    id: 'default-2',
-    url: '/lovable-uploads/230d7ba0-f969-4982-91ec-6ad5f202cdcd.png',
-    alt: 'Vista aérea do condomínio com área de lazer completa'
-  },
-  {
-    id: 'default-3',
-    url: '/lovable-uploads/bd930467-f1c2-43e3-a9dd-356103dc95df.png',
-    alt: 'Área esportiva com quadra poliesportiva e piscina'
-  },
-  {
-    id: 'default-4',
-    url: '/lovable-uploads/de85cc7c-baa4-4c09-a3f4-be28b3ded2d2.png',
-    alt: 'Portaria moderna e elegante do condomínio'
-  },
-  {
-    id: 'default-5',
-    url: '/lovable-uploads/01ff5adb-8b94-4939-9f7e-69e308a4e950.png',
-    alt: 'Fachadas das casas com design contemporâneo'
-  },
-  {
-    id: 'default-6',
-    url: '/lovable-uploads/617c932f-d57d-47d8-b749-99ddfe60c989.png',
-    alt: 'Área de piscina adulto com deck e lounges'
-  },
-  {
-    id: 'default-7',
-    url: '/lovable-uploads/ab0c69b5-1548-40f5-9283-148fe297f7f6.png',
-    alt: 'Vista panorâmica do condomínio com paisagismo'
-  },
-  {
-    id: 'default-8',
-    url: '/lovable-uploads/ef880c3a-6fab-4c98-8178-ef3430ef5ea9.png',
-    alt: 'Playground infantil com equipamentos modernos'
-  },
-  {
-    id: 'default-9',
-    url: '/lovable-uploads/a0a122bb-6eaf-478d-a962-39e8f03201eb.png',
-    alt: 'Área de lazer com piscina e espaço gourmet'
-  },
-  {
-    id: 'default-10',
-    url: '/lovable-uploads/7e70fce2-fd47-4b88-937f-99b337b7e622.png',
-    alt: 'Vista completa da área de lazer do condomínio'
-  }
-];
 
 const ImageCarousel = () => {
   const { carouselImages } = useAdmin();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
-  const observerRef = useRef<IntersectionObserver | null>(null);
 
-  // Combinar imagens padrão com as imagens do admin
-  const allImages = [...defaultImages, ...carouselImages];
+  // Usar apenas as imagens do contexto (que agora tem apenas as 10 primeiras)
+  const allImages = carouselImages;
 
   // Preload imagens adjacentes para melhor UX
   useEffect(() => {

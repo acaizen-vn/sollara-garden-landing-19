@@ -61,7 +61,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [heroTitle, setHeroTitle] = useState('SOLLARA GARDEN');
   const [heroSubtitle, setHeroSubtitle] = useState('BARRA MANSA');
   const [heroDescription, setHeroDescription] = useState('NOVIDADE NA REGIÃO SUL FLUMINENSE');
-  const [heroVideoUrl, setHeroVideoUrl] = useState('https://youtu.be/5yVlGgId68A?si=pOia_pnWmU6neGtl');
+  const [heroVideoUrl, setHeroVideoUrl] = useState('https://youtube.com/shorts/5yVlGgId68A?si=OtBBLC3zousFbFgs');
   const [heroVideoType, setHeroVideoType] = useState<'file' | 'youtube'>('youtube');
   const [heroBackgroundImage, setHeroBackgroundImage] = useState('');
 
@@ -74,57 +74,57 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     cnpj: '00.000.000/0001-00'
   });
 
-  // Carousel State - Limitado às 10 primeiras imagens
+  // Carousel State - Apenas as 10 primeiras imagens
   const [carouselImages, setCarouselImages] = useState<CarouselImage[]>([
     {
       id: '1',
-      url: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80',
-      alt: 'Fachada do Sollara Garden'
+      url: '/lovable-uploads/3e057a4c-5472-43d1-9559-aed684c23b2b.png',
+      alt: 'Casas modernas do Sollara Garden - Vista frontal das residências'
     },
     {
       id: '2',
-      url: 'https://images.unsplash.com/photo-1524230572899-a752b3835840?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80',
-      alt: 'Interior moderno'
+      url: '/lovable-uploads/230d7ba0-f969-4982-91ec-6ad5f202cdcd.png',
+      alt: 'Vista aérea do condomínio com área de lazer completa'
     },
     {
       id: '3',
-      url: 'https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80',
-      alt: 'Área de lazer'
+      url: '/lovable-uploads/bd930467-f1c2-43e3-a9dd-356103dc95df.png',
+      alt: 'Área esportiva com quadra poliesportiva e piscina'
     },
     {
       id: '4',
-      url: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80',
-      alt: 'Paisagem natural'
+      url: '/lovable-uploads/de85cc7c-baa4-4c09-a3f4-be28b3ded2d2.png',
+      alt: 'Portaria moderna e elegante do condomínio'
     },
     {
       id: '5',
-      url: 'https://images.unsplash.com/photo-1502005229762-cf1b2da60d2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80',
-      alt: 'Casa moderna'
+      url: '/lovable-uploads/01ff5adb-8b94-4939-9f7e-69e308a4e950.png',
+      alt: 'Fachadas das casas com design contemporâneo'
     },
     {
       id: '6',
-      url: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80',
-      alt: 'Sala de estar'
+      url: '/lovable-uploads/617c932f-d57d-47d8-b749-99ddfe60c989.png',
+      alt: 'Área de piscina adulto com deck e lounges'
     },
     {
       id: '7',
-      url: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80',
-      alt: 'Cozinha moderna'
+      url: '/lovable-uploads/ab0c69b5-1548-40f5-9283-148fe297f7f6.png',
+      alt: 'Vista panorâmica do condomínio com paisagismo'
     },
     {
       id: '8',
-      url: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80',
-      alt: 'Quarto master'
+      url: '/lovable-uploads/ef880c3a-6fab-4c98-8178-ef3430ef5ea9.png',
+      alt: 'Playground infantil com equipamentos modernos'
     },
     {
       id: '9',
-      url: 'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80',
-      alt: 'Área externa'
+      url: '/lovable-uploads/a0a122bb-6eaf-478d-a962-39e8f03201eb.png',
+      alt: 'Área de lazer com piscina e espaço gourmet'
     },
     {
       id: '10',
-      url: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80',
-      alt: 'Jardim'
+      url: '/lovable-uploads/7e70fce2-fd47-4b88-937f-99b337b7e622.png',
+      alt: 'Vista completa da área de lazer do condomínio'
     }
   ]);
 

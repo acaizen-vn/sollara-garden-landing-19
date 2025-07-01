@@ -11,13 +11,33 @@ const VideoSection = () => {
   const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  // Convert YouTube URL to embed format with proper autoplay
+  // Convert YouTube URL to embed format with proper autoplay for Shorts
   const getYouTubeEmbedUrl = (url: string) => {
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-    if (match && match[2].length === 11) {
-      return `https://www.youtube.com/embed/${match[2]}?autoplay=1&mute=1&loop=1&playlist=${match[2]}&controls=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&enablejsapi=1`;
+    console.log('Original URL:', url);
+    
+    // Handle different YouTube URL formats including Shorts
+    let videoId = '';
+    
+    if (url.includes('youtube.com/shorts/')) {
+      const match = url.match(/shorts\/([a-zA-Z0-9_-]+)/);
+      videoId = match ? match[1] : '';
+    } else if (url.includes('youtu.be/')) {
+      const match = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+      videoId = match ? match[1] : '';
+    } else if (url.includes('youtube.com/watch')) {
+      const match = url.match(/[?&]v=([a-zA-Z0-9_-]+)/);
+      videoId = match ? match[1] : '';
     }
+    
+    console.log('Extracted video ID:', videoId);
+    
+    if (videoId) {
+      // Use standard embed URL with autoplay parameters
+      const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&enablejsapi=1&origin=${window.location.origin}`;
+      console.log('Final embed URL:', embedUrl);
+      return embedUrl;
+    }
+    
     return url;
   };
 
@@ -113,6 +133,7 @@ const VideoSection = () => {
                       allowFullScreen
                       frameBorder="0"
                       title="Sollara Garden - Apresentação"
+                      loading="lazy"
                     />
                   </div>
                 ) : (
@@ -192,7 +213,7 @@ const VideoSection = () => {
                 <p className="text-gray-300">Reserve e garanta sua oportunidade</p>
               </div>
               <button className="bg-luxury-gold hover:bg-luxury-gold-dark text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
-                Reserve e Garanta Sua Oportunidade
+                Reserve e Garante Sua Oportunidade
               </button>
             </div>
           </div>
