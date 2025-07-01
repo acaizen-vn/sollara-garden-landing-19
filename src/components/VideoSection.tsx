@@ -6,16 +6,19 @@ import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 const VideoSection = () => {
   const { heroVideoUrl, heroVideoType } = useAdmin();
   const sectionRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [isIntersecting, setIsIntersecting] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  // Convert YouTube URL to embed format with autoplay
+  // Convert YouTube URL to embed format with proper autoplay
   const getYouTubeEmbedUrl = (url: string) => {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
-    return match && match[2].length === 11
-      ? `https://www.youtube.com/embed/${match[2]}?autoplay=1&mute=1&loop=1&playlist=${match[2]}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1`
-      : url;
+    if (match && match[2].length === 11) {
+      return `https://www.youtube.com/embed/${match[2]}?autoplay=1&mute=1&loop=1&playlist=${match[2]}&controls=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&enablejsapi=1`;
+    }
+    return url;
   };
 
   // Intersection Observer for auto play/pause
@@ -24,6 +27,16 @@ const VideoSection = () => {
       (entries) => {
         entries.forEach((entry) => {
           setIsIntersecting(entry.isIntersecting);
+          
+          if (heroVideoType === 'file' && videoRef.current) {
+            if (entry.isIntersecting) {
+              videoRef.current.play().catch(console.log);
+              setIsPlaying(true);
+            } else {
+              videoRef.current.pause();
+              setIsPlaying(false);
+            }
+          }
         });
       },
       { 
@@ -37,7 +50,19 @@ const VideoSection = () => {
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [heroVideoType]);
+
+  const togglePlayPause = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        videoRef.current.play();
+        setIsPlaying(true);
+      }
+    }
+  };
 
   if (!heroVideoUrl) return null;
 
@@ -89,14 +114,33 @@ const VideoSection = () => {
                       frameBorder="0"
                       title="Sollara Garden - Apresentação"
                     />
+                  </div>
+                ) : (
+                  <div className="relative w-full h-full">
+                    <video
+                      ref={videoRef}
+                      src={heroVideoUrl}
+                      className="w-full h-full object-cover rounded-3xl"
+                      autoPlay
+                      muted={isMuted}
+                      loop
+                      playsInline
+                    />
                     
-                    {/* Elegant overlay controls */}
+                    {/* Custom video controls */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl">
                       <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between">
                         <div className="flex items-center space-x-4">
-                          <div className="bg-white/10 backdrop-blur-md rounded-full p-3 border border-white/20">
-                            <Play className="w-5 h-5 text-white" />
-                          </div>
+                          <button
+                            onClick={togglePlayPause}
+                            className="bg-white/10 backdrop-blur-md rounded-full p-3 border border-white/20 hover:bg-white/20 transition-colors"
+                          >
+                            {isPlaying ? (
+                              <Pause className="w-5 h-5 text-white" />
+                            ) : (
+                              <Play className="w-5 h-5 text-white" />
+                            )}
+                          </button>
                           <div className="text-white font-medium">
                             Sollara Garden - Tour Virtual
                           </div>
@@ -111,15 +155,6 @@ const VideoSection = () => {
                       </div>
                     </div>
                   </div>
-                ) : (
-                  <video
-                    src={heroVideoUrl}
-                    className="w-full h-full object-cover rounded-3xl"
-                    autoPlay
-                    muted={isMuted}
-                    loop
-                    playsInline
-                  />
                 )}
               </div>
             </div>
@@ -153,11 +188,11 @@ const VideoSection = () => {
           <div className="text-center mt-16">
             <div className="inline-flex items-center space-x-6 bg-gradient-to-r from-luxury-gold/10 to-luxury-red/10 backdrop-blur-sm rounded-2xl p-6 border border-luxury-gold/20">
               <div className="text-left">
-                <h3 className="text-2xl font-bold text-white mb-2">Interessado?</h3>
-                <p className="text-gray-300">Entre em contato e agende sua visita</p>
+                <h3 className="text-2xl font-bold text-white mb-2">Reserve Sua Chave</h3>
+                <p className="text-gray-300">Reserve e garanta sua oportunidade</p>
               </div>
               <button className="bg-luxury-gold hover:bg-luxury-gold-dark text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
-                Falar com Consultor
+                Reserve e Garanta Sua Oportunidade
               </button>
             </div>
           </div>

@@ -74,7 +74,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     cnpj: '00.000.000/0001-00'
   });
 
-  // Carousel State
+  // Carousel State - Limitado às 10 primeiras imagens
   const [carouselImages, setCarouselImages] = useState<CarouselImage[]>([
     {
       id: '1',
@@ -95,6 +95,36 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       id: '4',
       url: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80',
       alt: 'Paisagem natural'
+    },
+    {
+      id: '5',
+      url: 'https://images.unsplash.com/photo-1502005229762-cf1b2da60d2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80',
+      alt: 'Casa moderna'
+    },
+    {
+      id: '6',
+      url: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80',
+      alt: 'Sala de estar'
+    },
+    {
+      id: '7',
+      url: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80',
+      alt: 'Cozinha moderna'
+    },
+    {
+      id: '8',
+      url: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80',
+      alt: 'Quarto master'
+    },
+    {
+      id: '9',
+      url: 'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80',
+      alt: 'Área externa'
+    },
+    {
+      id: '10',
+      url: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80',
+      alt: 'Jardim'
     }
   ]);
 

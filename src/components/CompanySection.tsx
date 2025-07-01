@@ -76,25 +76,16 @@ const CompanySection = () => {
               </div>
             </div>
 
-            {/* Visual Element */}
+            {/* Visual Element - Imagem da família */}
             <div className="animate-fade-in">
               <div className="relative">
                 <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
                   <img
-                    src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                    alt="Grupo Salha Empreendimentos"
+                    src="https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                    alt="Família feliz - Grupo Salha Empreendimentos"
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-luxury-brown/20"></div>
-                </div>
-                
-                {/* Floating Badge */}
-                <div className="absolute -bottom-6 -right-6 bg-luxury-gold rounded-2xl p-6 shadow-xl">
-                  <div className="text-center">
-                    <div className="font-playfair text-2xl font-bold text-luxury-brown">30+</div>
-                    <div className="text-sm text-luxury-brown uppercase tracking-wide">Anos de</div>
-                    <div className="text-sm text-luxury-brown uppercase tracking-wide">Experiência</div>
-                  </div>
+                  <div className="absolute inset-0 bg-luxury-brown/10"></div>
                 </div>
               </div>
             </div>
