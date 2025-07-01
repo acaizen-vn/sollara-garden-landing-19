@@ -22,7 +22,6 @@ const HeroSection = () => {
           if (entry.isIntersecting) {
             setIsVideoInView(true);
             video.play().catch(() => {
-              // Fallback se autoplay falhar
               console.log('Autoplay prevented');
             });
           } else {
@@ -32,7 +31,7 @@ const HeroSection = () => {
         });
       },
       {
-        threshold: 0.5, // Reproduz quando 50% do vídeo está visível
+        threshold: 0.5,
         rootMargin: '-10% 0px -10% 0px'
       }
     );
@@ -100,6 +99,7 @@ const HeroSection = () => {
                   loop
                   playsInline
                   preload="metadata"
+                  controls={false}
                   style={{
                     filter: 'brightness(0.9) contrast(1.1)',
                   }}
@@ -107,15 +107,6 @@ const HeroSection = () => {
                 
                 {/* Elegant Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
-                
-                {/* Video Label */}
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
-                    <p className="text-white/90 text-sm uppercase tracking-wide font-inter">
-                      Vídeo Institucional
-                    </p>
-                  </div>
-                </div>
               </div>
               
               {/* Subtle indicator */}
