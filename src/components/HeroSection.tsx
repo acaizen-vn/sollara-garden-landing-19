@@ -5,7 +5,7 @@ import { Play } from 'lucide-react';
 import { useAdmin } from '@/contexts/AdminContext';
 
 const HeroSection = () => {
-  const { heroTitle, heroSubtitle, heroDescription, heroVideoUrl } = useAdmin();
+  const { heroTitle, heroSubtitle, heroDescription, heroVideoUrl, heroBackgroundImage } = useAdmin();
   
   const scrollToContact = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -23,13 +23,22 @@ const HeroSection = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `linear-gradient(rgba(62, 44, 35, 0.7), rgba(42, 27, 20, 0.8)), url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80')`
+          backgroundImage: `linear-gradient(rgba(62, 44, 35, 0.7), rgba(42, 27, 20, 0.8)), url('${heroBackgroundImage || 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80'}')`
         }}
       />
       
       {/* Content */}
       <div className="relative z-10 text-center px-4 md:px-8 max-w-6xl mx-auto">
         <div className="animate-fade-in">
+          {/* Logo */}
+          <div className="mb-8">
+            <img 
+              src="/lovable-uploads/c67509dc-b8fd-4b63-a711-7737584ea409.png" 
+              alt="Sollara Garden Logo"
+              className="mx-auto h-32 md:h-40 lg:h-48 w-auto"
+            />
+          </div>
+          
           <h1 className="font-playfair text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 uppercase tracking-wider text-shadow">
             {heroTitle}
           </h1>

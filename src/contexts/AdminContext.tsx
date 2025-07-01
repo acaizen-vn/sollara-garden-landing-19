@@ -5,6 +5,7 @@ interface CarouselImage {
   id: string;
   url: string;
   alt: string;
+  file?: File;
 }
 
 interface FormSubmission {
@@ -15,16 +16,26 @@ interface FormSubmission {
   timestamp: string;
 }
 
+interface FooterContent {
+  companyName: string;
+  tagline: string;
+  description: string;
+  creci: string;
+  cnpj: string;
+}
+
 interface AdminContextType {
   // Hero Section
   heroTitle: string;
   heroSubtitle: string;
   heroDescription: string;
   heroVideoUrl: string;
+  heroBackgroundImage: string;
   setHeroTitle: (title: string) => void;
   setHeroSubtitle: (subtitle: string) => void;
   setHeroDescription: (description: string) => void;
   setHeroVideoUrl: (url: string) => void;
+  setHeroBackgroundImage: (url: string) => void;
 
   // Carousel
   carouselImages: CarouselImage[];
@@ -35,6 +46,10 @@ interface AdminContextType {
   // Form Submissions
   formSubmissions: FormSubmission[];
   addFormSubmission: (submission: Omit<FormSubmission, 'id' | 'timestamp'>) => void;
+
+  // Footer
+  footerContent: FooterContent;
+  setFooterContent: (content: FooterContent) => void;
 }
 
 const AdminContext = createContext<AdminContextType | undefined>(undefined);
@@ -45,6 +60,16 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [heroSubtitle, setHeroSubtitle] = useState('BARRA MANSA');
   const [heroDescription, setHeroDescription] = useState('NOVIDADE NA REGIÃO SUL FLUMINENSE');
   const [heroVideoUrl, setHeroVideoUrl] = useState('');
+  const [heroBackgroundImage, setHeroBackgroundImage] = useState('');
+
+  // Footer State
+  const [footerContent, setFooterContent] = useState<FooterContent>({
+    companyName: 'SOLLARA GARDEN BARRA MANSA',
+    tagline: 'Grupo Salha Empreendimentos',
+    description: 'Transformando sonhos em realidade há mais de 30 anos na região do Vale do Paraíba',
+    creci: '00000-J',
+    cnpj: '00.000.000/0001-00'
+  });
 
   // Carousel State
   const [carouselImages, setCarouselImages] = useState<CarouselImage[]>([
@@ -83,8 +108,10 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         if (data.heroSubtitle) setHeroSubtitle(data.heroSubtitle);
         if (data.heroDescription) setHeroDescription(data.heroDescription);
         if (data.heroVideoUrl) setHeroVideoUrl(data.heroVideoUrl);
+        if (data.heroBackgroundImage) setHeroBackgroundImage(data.heroBackgroundImage);
         if (data.carouselImages) setCarouselImages(data.carouselImages);
         if (data.formSubmissions) setFormSubmissions(data.formSubmissions);
+        if (data.footerContent) setFooterContent(data.footerContent);
       } catch (error) {
         console.error('Error loading admin data:', error);
       }
@@ -98,11 +125,13 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       heroSubtitle,
       heroDescription,
       heroVideoUrl,
+      heroBackgroundImage,
       carouselImages,
-      formSubmissions
+      formSubmissions,
+      footerContent
     };
     localStorage.setItem('adminData', JSON.stringify(adminData));
-  }, [heroTitle, heroSubtitle, heroDescription, heroVideoUrl, carouselImages, formSubmissions]);
+  }, [heroTitle, heroSubtitle, heroDescription, heroVideoUrl, heroBackgroundImage, carouselImages, formSubmissions, footerContent]);
 
   const addCarouselImage = (image: CarouselImage) => {
     setCarouselImages(prev => [...prev, image]);
@@ -133,16 +162,20 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       heroSubtitle,
       heroDescription,
       heroVideoUrl,
+      heroBackgroundImage,
       setHeroTitle,
       setHeroSubtitle,
       setHeroDescription,
       setHeroVideoUrl,
+      setHeroBackgroundImage,
       carouselImages,
       addCarouselImage,
       removeCarouselImage,
       updateCarouselImage,
       formSubmissions,
-      addFormSubmission
+      addFormSubmission,
+      footerContent,
+      setFooterContent
     }}>
       {children}
     </AdminContext.Provider>

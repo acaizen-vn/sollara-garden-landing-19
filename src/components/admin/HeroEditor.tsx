@@ -1,11 +1,11 @@
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAdmin } from '@/contexts/AdminContext';
 import { useToast } from '@/hooks/use-toast';
-import { Save } from 'lucide-react';
+import { Save, Upload, X } from 'lucide-react';
 
 const HeroEditor = () => {
   const {
@@ -13,19 +13,41 @@ const HeroEditor = () => {
     heroSubtitle,
     heroDescription,
     heroVideoUrl,
+    heroBackgroundImage,
     setHeroTitle,
     setHeroSubtitle,
     setHeroDescription,
-    setHeroVideoUrl
+    setHeroVideoUrl,
+    setHeroBackgroundImage
   } = useAdmin();
   
   const { toast } = useToast();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleSave = () => {
     toast({
       title: "Configurações salvas!",
       description: "As alterações da seção principal foram salvas com sucesso.",
     });
+  };
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const result = e.target?.result as string;
+        setHeroBackgroundImage(result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeBackgroundImage = () => {
+    setHeroBackgroundImage('');
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   return (
@@ -65,17 +87,63 @@ const HeroEditor = () => {
         </div>
 
         <div>
-          <Label htmlFor="hero-video">URL do Vídeo (opcional)</Label>
+          <Label htmlFor="hero-video">Arquivo de Vídeo</Label>
           <Input
             id="hero-video"
-            value={heroVideoUrl}
-            onChange={(e) => setHeroVideoUrl(e.target.value)}
-            placeholder="https://www.youtube.com/watch?v=..."
+            type="file"
+            accept="video/*"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                const url = URL.createObjectURL(file);
+                setHeroVideoUrl(url);
+              }
+            }}
             className="mt-1"
           />
           <p className="text-sm text-gray-500 mt-1">
-            Cole o link do YouTube ou outro serviço de vídeo
+            Selecione um arquivo de vídeo do seu computador
           </p>
+          {heroVideoUrl && (
+            <div className="mt-2 flex items-center space-x-2">
+              <span className="text-sm text-green-600">Vídeo carregado</span>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => setHeroVideoUrl('')}
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+          )}
+        </div>
+
+        <div>
+          <Label htmlFor="hero-background">Imagem de Fundo do Cabeçalho</Label>
+          <div className="mt-1 space-y-2">
+            <Input
+              ref={fileInputRef}
+              id="hero-background"
+              type="file"
+              accept="image/*"
+              onChange={handleFileUpload}
+            />
+            <p className="text-sm text-gray-500">
+              Selecione uma imagem para o fundo do cabeçalho
+            </p>
+            {heroBackgroundImage && (
+              <div className="flex items-center space-x-2">
+                <span className="text-sm text-green-600">Imagem carregada</span>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={removeBackgroundImage}
+                >
+                  <X className="w-4 h-4" />
+                </Button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -93,7 +161,17 @@ const HeroEditor = () => {
           <p className="text-xl text-amber-600">{heroSubtitle || 'Subtítulo'}</p>
           <p className="text-gray-600">{heroDescription || 'Descrição'}</p>
           {heroVideoUrl && (
-            <p className="text-sm text-blue-600">Vídeo configurado: {heroVideoUrl}</p>
+            <p className="text-sm text-blue-600">Vídeo configurado</p>
+          )}
+          {heroBackgroundImage && (
+            <div className="mt-2">
+              <p className="text-sm text-green-600 mb-2">Imagem de fundo:</p>
+              <img 
+                src={heroBackgroundImage} 
+                alt="Background preview" 
+                className="w-32 h-20 object-cover rounded"
+              />
+            </div>
           )}
         </div>
       </div>

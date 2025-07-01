@@ -3,11 +3,12 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ArrowLeft, Settings, Image, MessageSquare, Video } from 'lucide-react';
+import { ArrowLeft, Settings, Image, MessageSquare, Video, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import HeroEditor from '@/components/admin/HeroEditor';
 import CarouselEditor from '@/components/admin/CarouselEditor';
 import FormSubmissions from '@/components/admin/FormSubmissions';
+import FooterEditor from '@/components/admin/FooterEditor';
 
 const Admin = () => {
   return (
@@ -36,7 +37,7 @@ const Admin = () => {
 
       <div className="container mx-auto px-4 py-8">
         <Tabs defaultValue="hero" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="hero" className="flex items-center space-x-2">
               <Video className="w-4 h-4" />
               <span>Seção Principal</span>
@@ -44,6 +45,10 @@ const Admin = () => {
             <TabsTrigger value="carousel" className="flex items-center space-x-2">
               <Image className="w-4 h-4" />
               <span>Galeria</span>
+            </TabsTrigger>
+            <TabsTrigger value="footer" className="flex items-center space-x-2">
+              <FileText className="w-4 h-4" />
+              <span>Rodapé</span>
             </TabsTrigger>
             <TabsTrigger value="leads" className="flex items-center space-x-2">
               <MessageSquare className="w-4 h-4" />
@@ -56,7 +61,7 @@ const Admin = () => {
               <CardHeader>
                 <CardTitle>Editar Seção Principal</CardTitle>
                 <CardDescription>
-                  Configure os textos e vídeo da seção principal da página
+                  Configure os textos, vídeo e imagem de fundo da seção principal
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -79,12 +84,26 @@ const Admin = () => {
             </Card>
           </TabsContent>
 
+          <TabsContent value="footer">
+            <Card>
+              <CardHeader>
+                <CardTitle>Editar Rodapé</CardTitle>
+                <CardDescription>
+                  Configure as informações do rodapé da página
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <FooterEditor />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
           <TabsContent value="leads">
             <Card>
               <CardHeader>
                 <CardTitle>Leads Capturados</CardTitle>
                 <CardDescription>
-                  Visualize todos os contatos enviados pelo formulário
+                  Visualize e exporte todos os contatos enviados pelo formulário
                 </CardDescription>
               </CardHeader>
               <CardContent>

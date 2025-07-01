@@ -3,8 +3,9 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { useAdmin } from '@/contexts/AdminContext';
-import { Phone, Mail, Calendar, User } from 'lucide-react';
+import { Phone, Mail, Calendar, User, Download, FileSpreadsheet } from 'lucide-react';
 
 const FormSubmissions = () => {
   const { formSubmissions } = useAdmin();
@@ -22,6 +23,62 @@ const FormSubmissions = () => {
 
   const formatPhone = (phone: string) => {
     return phone.replace(/\D/g, '').replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+  };
+
+  const exportToCSV = () => {
+    const headers = ['Nome', 'E-mail', 'WhatsApp', 'Data'];
+    const csvContent = [
+      headers.join(','),
+      ...formSubmissions.map(submission => [
+        `"${submission.name}"`,
+        `"${submission.email}"`,
+        `"${formatPhone(submission.phone)}"`,
+        `"${formatDate(submission.timestamp)}"`
+      ].join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `leads_sollara_garden_${new Date().toISOString().split('T')[0]}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const exportToExcel = () => {
+    const headers = ['Nome', 'E-mail', 'WhatsApp', 'Data'];
+    let excelContent = '<table border="1"><tr>';
+    
+    // Headers
+    headers.forEach(header => {
+      excelContent += `<th>${header}</th>`;
+    });
+    excelContent += '</tr>';
+    
+    // Data
+    formSubmissions.forEach(submission => {
+      excelContent += '<tr>';
+      excelContent += `<td>${submission.name}</td>`;
+      excelContent += `<td>${submission.email}</td>`;
+      excelContent += `<td>${formatPhone(submission.phone)}</td>`;
+      excelContent += `<td>${formatDate(submission.timestamp)}</td>`;
+      excelContent += '</tr>';
+    });
+    
+    excelContent += '</table>';
+    
+    const blob = new Blob([excelContent], { type: 'application/vnd.ms-excel' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `leads_sollara_garden_${new Date().toISOString().split('T')[0]}.xls`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   if (formSubmissions.length === 0) {
@@ -82,6 +139,18 @@ const FormSubmissions = () => {
             </div>
           </CardContent>
         </Card>
+      </div>
+
+      {/* Export Buttons */}
+      <div className="flex space-x-4">
+        <Button onClick={exportToCSV} variant="outline" className="flex items-center space-x-2">
+          <Download className="w-4 h-4" />
+          <span>Exportar CSV</span>
+        </Button>
+        <Button onClick={exportToExcel} variant="outline" className="flex items-center space-x-2">
+          <FileSpreadsheet className="w-4 h-4" />
+          <span>Exportar Excel</span>
+        </Button>
       </div>
 
       <Card>
