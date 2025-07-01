@@ -1,6 +1,7 @@
 
 import React from 'react';
 import HeroSection from '@/components/HeroSection';
+import VideoSection from '@/components/VideoSection';
 import AboutSection from '@/components/AboutSection';
 import ImageCarousel from '@/components/ImageCarousel';
 import DifferentialsSection from '@/components/DifferentialsSection';
@@ -14,6 +15,7 @@ const Index = () => {
     <div className="min-h-screen">
       <ScrollIndicator />
       <HeroSection />
+      <VideoSection />
       <AboutSection />
       <ImageCarousel />
       <DifferentialsSection />

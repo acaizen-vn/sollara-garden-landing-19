@@ -12,8 +12,8 @@ const HeroSection = () => {
   const [scrollY, setScrollY] = useState(0);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   
-  const scrollToContact = () => {
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToVideoSection = () => {
+    document.getElementById('video-section')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   // Parallax effect
@@ -83,48 +83,57 @@ const HeroSection = () => {
       {/* Innovative content layout */}
       <div className="relative z-20 text-center px-4 md:px-8 max-w-6xl mx-auto">
         <div className="innovative-hero-content space-y-12">
-          {/* Logo with enhanced effects */}
+          {/* Logo with enhanced effects - INCREASED SIZE */}
           <div className="logo-container">
-            <HeroLogo />
+            <div className="mb-8 group">
+              <div className="relative inline-block">
+                <img 
+                  src="/lovable-uploads/c67509dc-b8fd-4b63-a711-7737584ea409.png" 
+                  alt="Sollara Garden Logo"
+                  className="mx-auto h-72 md:h-80 lg:h-96 w-auto drop-shadow-2xl transition-all duration-700 group-hover:scale-105 group-hover:drop-shadow-3xl filter brightness-110 contrast-110"
+                />
+                
+                {/* Enhanced multi-layered glow with red accents */}
+                <div className="absolute inset-0 bg-gradient-to-r from-luxury-gold/25 via-luxury-red/15 to-luxury-gold/25 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-luxury-red/20 via-transparent to-luxury-gold/20 rounded-full blur-2xl opacity-0 group-hover:opacity-80 transition-opacity duration-500 -z-10" />
+                
+                {/* Elegant pulsing border glow */}
+                <div className="absolute inset-0 rounded-full border-2 border-luxury-red/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm animate-vintage-glow" />
+                <div className="absolute inset-0 rounded-full border border-luxury-gold/40 opacity-0 group-hover:opacity-60 transition-opacity duration-700 blur-xs" />
+                
+                {/* Subtle rotating accent ring */}
+                <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-30 transition-opacity duration-1000">
+                  <div className="w-full h-full border-2 border-dashed border-luxury-red/50 rounded-full animate-spin-slow"></div>
+                </div>
+              </div>
+            </div>
           </div>
           
-          {/* Innovative title design */}
-          <div className="title-section space-y-6">
-            <h1 className="text-5xl md:text-7xl font-sf-pro font-bold text-white leading-tight">
-              <span className="block text-luxury-gold drop-shadow-2xl">SOLLARA</span>
-              <span className="block text-white/90 text-4xl md:text-5xl font-light tracking-wider">GARDEN</span>
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-white/80 font-light max-w-3xl mx-auto leading-relaxed">
-              Seu novo lar em um condomínio de luxo com infraestrutura completa
-            </p>
-          </div>
-          
-          {/* Modern CTA Button */}
-          <div className="cta-section">
-            <LiquidButton 
-              onClick={scrollToContact}
-              className="btn-modern-red text-xl font-semibold px-12 py-5 transform hover:scale-105 transition-all duration-300"
-              size="lg"
-            >
-              DESCUBRA SEU LAR
-            </LiquidButton>
-          </div>
-          
-          {/* Innovative info cards */}
+          {/* Innovative info cards with updated numbers */}
           <div className="info-cards grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
             <div className="info-card backdrop-blur-md bg-white/10 rounded-2xl p-6 border border-white/20">
-              <div className="text-3xl font-bold text-luxury-gold mb-2">15</div>
+              <div className="text-3xl font-bold text-luxury-gold mb-2">315</div>
               <div className="text-white/90 font-medium">Casas Disponíveis</div>
             </div>
             <div className="info-card backdrop-blur-md bg-white/10 rounded-2xl p-6 border border-white/20">
-              <div className="text-3xl font-bold text-luxury-gold mb-2">5000m²</div>
+              <div className="text-3xl font-bold text-luxury-gold mb-2">8300m²</div>
               <div className="text-white/90 font-medium">Área de Lazer</div>
             </div>
             <div className="info-card backdrop-blur-md bg-white/10 rounded-2xl p-6 border border-white/20">
-              <div className="text-3xl font-bold text-luxury-gold mb-2">100%</div>
+              <div className="text-3xl font-bold text-luxury-gold mb-2">400%</div>
               <div className="text-white/90 font-medium">Segurança 24h</div>
             </div>
+          </div>
+
+          {/* Modern CTA Button - Moved below cards */}
+          <div className="cta-section mt-12">
+            <LiquidButton 
+              onClick={scrollToVideoSection}
+              className="btn-modern-red text-xl font-semibold px-12 py-5 transform hover:scale-105 transition-all duration-300"
+              size="lg"
+            >
+              CONHEÇA O SOLLARA GARDEN
+            </LiquidButton>
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ import React, { useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useAdmin } from '@/contexts/AdminContext';
 import { useToast } from '@/hooks/use-toast';
 import { Save, Upload, X } from 'lucide-react';
@@ -13,11 +14,13 @@ const HeroEditor = () => {
     heroSubtitle,
     heroDescription,
     heroVideoUrl,
+    heroVideoType,
     heroBackgroundImage,
     setHeroTitle,
     setHeroSubtitle,
     setHeroDescription,
     setHeroVideoUrl,
+    setHeroVideoType,
     setHeroBackgroundImage
   } = useAdmin();
   
@@ -41,6 +44,20 @@ const HeroEditor = () => {
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleVideoFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setHeroVideoUrl(url);
+      setHeroVideoType('file');
+    }
+  };
+
+  const handleYouTubeUrlChange = (url: string) => {
+    setHeroVideoUrl(url);
+    setHeroVideoType('youtube');
   };
 
   const removeBackgroundImage = () => {
@@ -86,27 +103,50 @@ const HeroEditor = () => {
           />
         </div>
 
-        <div>
-          <Label htmlFor="hero-video">Arquivo de Vídeo</Label>
-          <Input
-            id="hero-video"
-            type="file"
-            accept="video/*"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file) {
-                const url = URL.createObjectURL(file);
-                setHeroVideoUrl(url);
-              }
-            }}
-            className="mt-1"
-          />
-          <p className="text-sm text-gray-500 mt-1">
-            Selecione um arquivo de vídeo do seu computador
-          </p>
+        <div className="space-y-4">
+          <Label>Tipo de Vídeo</Label>
+          <Select value={heroVideoType} onValueChange={setHeroVideoType}>
+            <SelectTrigger>
+              <SelectValue placeholder="Selecione o tipo de vídeo" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="file">Arquivo de Vídeo</SelectItem>
+              <SelectItem value="youtube">Link do YouTube</SelectItem>
+            </SelectContent>
+          </Select>
+
+          {heroVideoType === 'youtube' ? (
+            <div>
+              <Label htmlFor="youtube-url">Link do YouTube</Label>
+              <Input
+                id="youtube-url"
+                value={heroVideoUrl}
+                onChange={(e) => handleYouTubeUrlChange(e.target.value)}
+                placeholder="https://www.youtube.com/watch?v=..."
+                className="mt-1"
+              />
+            </div>
+          ) : (
+            <div>
+              <Label htmlFor="hero-video">Arquivo de Vídeo</Label>
+              <Input
+                id="hero-video"
+                type="file"
+                accept="video/*"
+                onChange={handleVideoFileUpload}
+                className="mt-1"
+              />
+              <p className="text-sm text-gray-500 mt-1">
+                Selecione um arquivo de vídeo do seu computador
+              </p>
+            </div>
+          )}
+
           {heroVideoUrl && (
             <div className="mt-2 flex items-center space-x-2">
-              <span className="text-sm text-green-600">Vídeo carregado</span>
+              <span className="text-sm text-green-600">
+                {heroVideoType === 'youtube' ? 'YouTube configurado' : 'Vídeo carregado'}
+              </span>
               <Button
                 size="sm"
                 variant="outline"
@@ -161,7 +201,9 @@ const HeroEditor = () => {
           <p className="text-xl text-amber-600">{heroSubtitle || 'Subtítulo'}</p>
           <p className="text-gray-600">{heroDescription || 'Descrição'}</p>
           {heroVideoUrl && (
-            <p className="text-sm text-blue-600">Vídeo configurado</p>
+            <p className="text-sm text-blue-600">
+              {heroVideoType === 'youtube' ? 'YouTube configurado' : 'Vídeo configurado'}
+            </p>
           )}
           {heroBackgroundImage && (
             <div className="mt-2">
