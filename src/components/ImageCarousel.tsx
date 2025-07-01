@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Image as ImageIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -261,58 +262,5 @@ const ImageCarousel = () => {
     </section>
   );
 };
-
-const handleImageError = (url: string) => {
-    setImageErrors(prev => new Set([...prev, url]));
-  };
-
-  const ImageWithFallback = ({ 
-    src, 
-    alt, 
-    className, 
-    onClick 
-  }: { 
-    src: string; 
-    alt: string; 
-    className?: string; 
-    onClick?: () => void;
-  }) => {
-    const [isLoading, setIsLoading] = useState(!loadedImages.has(src));
-    const hasError = imageErrors.has(src);
-
-    if (hasError) {
-      return (
-        <div className={`${className} bg-gray-200 flex items-center justify-center`} onClick={onClick}>
-          <div className="text-center text-gray-500">
-            <ImageIcon className="w-8 h-8 mx-auto mb-2" />
-            <p className="text-sm">Imagem não disponível</p>
-          </div>
-        </div>
-      );
-    }
-
-    return (
-      <div className="relative">
-        {isLoading && (
-          <div className={`${className} bg-gray-200 animate-pulse flex items-center justify-center absolute inset-0`}>
-            <div className="w-8 h-8 border-4 border-gray-300 border-t-gray-600 rounded-full animate-spin"></div>
-          </div>
-        )}
-        <img
-          src={src}
-          alt={alt}
-          className={className}
-          onClick={onClick}
-          loading="lazy"
-          onLoad={() => {
-            setIsLoading(false);
-            setLoadedImages(prev => new Set([...prev, src]));
-          }}
-          onError={() => handleImageError(src)}
-          style={{ display: isLoading ? 'none' : 'block' }}
-        />
-      </div>
-    );
-  };
 
 export default ImageCarousel;
