@@ -112,16 +112,16 @@ const HeroSection = () => {
           {/* Innovative info cards with updated numbers */}
           <div className="info-cards grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
             <div className="info-card backdrop-blur-md bg-white/10 rounded-2xl p-6 border border-white/20">
-              <div className="text-3xl font-bold text-luxury-gold mb-2">315</div>
+              <div className="text-3xl font-bold text-luxury-gold mb-2">320</div>
               <div className="text-white/90 font-medium">Casas Disponíveis</div>
             </div>
             <div className="info-card backdrop-blur-md bg-white/10 rounded-2xl p-6 border border-white/20">
-              <div className="text-3xl font-bold text-luxury-gold mb-2">8300m²</div>
+              <div className="text-3xl font-bold text-luxury-gold mb-2">+1000m²</div>
               <div className="text-white/90 font-medium">Área de Lazer</div>
             </div>
             <div className="info-card backdrop-blur-md bg-white/10 rounded-2xl p-6 border border-white/20">
-              <div className="text-3xl font-bold text-luxury-gold mb-2">400%</div>
-              <div className="text-white/90 font-medium">Segurança 24h</div>
+              <div className="text-3xl font-bold text-luxury-gold mb-2">100%</div>
+              <div className="text-white/90 font-medium">Segurança</div>
             </div>
           </div>
 
