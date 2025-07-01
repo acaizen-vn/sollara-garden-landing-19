@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 interface CarouselImage {
@@ -30,11 +29,13 @@ interface AdminContextType {
   heroSubtitle: string;
   heroDescription: string;
   heroVideoUrl: string;
+  heroVideoType: 'file' | 'youtube';
   heroBackgroundImage: string;
   setHeroTitle: (title: string) => void;
   setHeroSubtitle: (subtitle: string) => void;
   setHeroDescription: (description: string) => void;
   setHeroVideoUrl: (url: string) => void;
+  setHeroVideoType: (type: 'file' | 'youtube') => void;
   setHeroBackgroundImage: (url: string) => void;
 
   // Carousel
@@ -60,6 +61,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [heroSubtitle, setHeroSubtitle] = useState('BARRA MANSA');
   const [heroDescription, setHeroDescription] = useState('NOVIDADE NA REGIÃO SUL FLUMINENSE');
   const [heroVideoUrl, setHeroVideoUrl] = useState('');
+  const [heroVideoType, setHeroVideoType] = useState<'file' | 'youtube'>('file');
   const [heroBackgroundImage, setHeroBackgroundImage] = useState('');
 
   // Footer State
@@ -108,6 +110,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         if (data.heroSubtitle) setHeroSubtitle(data.heroSubtitle);
         if (data.heroDescription) setHeroDescription(data.heroDescription);
         if (data.heroVideoUrl) setHeroVideoUrl(data.heroVideoUrl);
+        if (data.heroVideoType) setHeroVideoType(data.heroVideoType);
         if (data.heroBackgroundImage) setHeroBackgroundImage(data.heroBackgroundImage);
         if (data.carouselImages) setCarouselImages(data.carouselImages);
         if (data.formSubmissions) setFormSubmissions(data.formSubmissions);
@@ -125,13 +128,14 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       heroSubtitle,
       heroDescription,
       heroVideoUrl,
+      heroVideoType,
       heroBackgroundImage,
       carouselImages,
       formSubmissions,
       footerContent
     };
     localStorage.setItem('adminData', JSON.stringify(adminData));
-  }, [heroTitle, heroSubtitle, heroDescription, heroVideoUrl, heroBackgroundImage, carouselImages, formSubmissions, footerContent]);
+  }, [heroTitle, heroSubtitle, heroDescription, heroVideoUrl, heroVideoType, heroBackgroundImage, carouselImages, formSubmissions, footerContent]);
 
   const addCarouselImage = (image: CarouselImage) => {
     setCarouselImages(prev => [...prev, image]);
@@ -162,11 +166,13 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       heroSubtitle,
       heroDescription,
       heroVideoUrl,
+      heroVideoType,
       heroBackgroundImage,
       setHeroTitle,
       setHeroSubtitle,
       setHeroDescription,
       setHeroVideoUrl,
+      setHeroVideoType,
       setHeroBackgroundImage,
       carouselImages,
       addCarouselImage,
