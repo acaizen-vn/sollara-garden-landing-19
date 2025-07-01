@@ -1,13 +1,14 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
+import { useAdmin } from '@/contexts/AdminContext';
 import { Phone, Mail, MapPin } from 'lucide-react';
 
 const ContactForm = () => {
   const { toast } = useToast();
+  const { addFormSubmission } = useAdmin();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -35,6 +36,13 @@ const ContactForm = () => {
 
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1000));
+
+    // Save to admin context
+    addFormSubmission({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone
+    });
 
     toast({
       title: "Interesse registrado com sucesso!",
