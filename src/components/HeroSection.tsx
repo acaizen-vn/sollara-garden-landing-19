@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { useAdmin } from '@/contexts/AdminContext';
 
 const HeroSection = () => {
-  const { heroTitle, heroSubtitle, heroDescription, heroVideoUrl, heroBackgroundImage } = useAdmin();
+  const { heroVideoUrl, heroBackgroundImage } = useAdmin();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoInView, setIsVideoInView] = useState(false);
   
@@ -61,20 +61,9 @@ const HeroSection = () => {
             <img 
               src="/lovable-uploads/c67509dc-b8fd-4b63-a711-7737584ea409.png" 
               alt="Sollara Garden Logo"
-              className="mx-auto h-32 md:h-40 lg:h-48 w-auto"
+              className="mx-auto h-48 md:h-56 lg:h-64 w-auto"
             />
           </div>
-          
-          <h1 className="font-playfair text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 uppercase tracking-wider text-shadow">
-            {heroTitle}
-          </h1>
-          <div className="w-32 h-1 bg-luxury-gold mx-auto mb-6"></div>
-          <h2 className="font-playfair text-2xl md:text-4xl lg:text-5xl font-medium text-luxury-gold-light mb-8 uppercase tracking-wide text-shadow">
-            {heroSubtitle}
-          </h2>
-          <p className="text-xl md:text-2xl text-white mb-12 font-inter uppercase tracking-wider text-shadow">
-            {heroDescription}
-          </p>
           
           {/* CTA Button */}
           <div className="animate-scale-in mb-12">
