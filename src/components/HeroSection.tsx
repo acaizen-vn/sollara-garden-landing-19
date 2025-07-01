@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -93,7 +92,7 @@ const HeroSection = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `linear-gradient(rgba(62, 44, 35, 0.7), rgba(42, 27, 20, 0.8)), url('${heroBackgroundImage || 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80'}')`
+          backgroundImage: `linear-gradient(rgba(62, 44, 35, 0.4), rgba(42, 27, 20, 0.6)), url('${heroBackgroundImage || '/lovable-uploads/318e54c2-e94e-4b91-a4ed-5f6aeade3dbb.png'}')`
         }}
       />
       
@@ -105,7 +104,7 @@ const HeroSection = () => {
             <img 
               src="/lovable-uploads/c67509dc-b8fd-4b63-a711-7737584ea409.png" 
               alt="Sollara Garden Logo"
-              className="mx-auto h-48 md:h-56 lg:h-64 w-auto"
+              className="mx-auto h-56 md:h-64 lg:h-72 w-auto drop-shadow-2xl"
             />
           </div>
           
@@ -114,7 +113,7 @@ const HeroSection = () => {
             <Button
               size="lg"
               onClick={scrollToContact}
-              className="btn-primary text-lg px-12 py-6"
+              className="btn-primary text-lg px-12 py-6 shadow-2xl"
             >
               QUERO SABER MAIS
             </Button>
