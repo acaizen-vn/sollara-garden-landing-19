@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -82,10 +83,20 @@ export default {
 						opacity: '1',
 						transform: 'translateY(0)'
 					}
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0px)' },
+					'50%': { transform: 'translateY(-10px)' }
+				},
+				'spin-slow': {
+					'from': { transform: 'rotate(0deg)' },
+					'to': { transform: 'rotate(360deg)' }
 				}
 			},
 			animation: {
-				'fade-in': 'simple-fade 0.6s ease-out'
+				'fade-in': 'simple-fade 0.6s ease-out',
+				'float': 'float 3s ease-in-out infinite',
+				'spin-slow': 'spin-slow 20s linear infinite'
 			},
 			fontFamily: {
 				'sf-pro': ['"SF Pro Display"', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
@@ -94,6 +105,9 @@ export default {
 			boxShadow: {
 				'modern': '0 4px 20px rgba(0, 0, 0, 0.08)',
 				'modern-lg': '0 8px 30px rgba(0, 0, 0, 0.12)',
+			},
+			borderWidth: {
+				'3': '3px',
 			}
 		}
 	},

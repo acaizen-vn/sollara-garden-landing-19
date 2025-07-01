@@ -135,4 +135,94 @@
   .glass-modern {
     @apply modern-glass rounded-2xl p-6;
   }
+
+  /* Innovative Hero Styles */
+  .innovative-hero-content {
+    animation: heroFadeIn 1.2s ease-out forwards;
+  }
+
+  .logo-container {
+    animation: logoFloat 3s ease-in-out infinite;
+  }
+
+  .title-section {
+    animation: titleSlideUp 1s ease-out 0.3s backwards;
+  }
+
+  .cta-section {
+    animation: ctaScale 0.8s ease-out 0.6s backwards;
+  }
+
+  .info-cards {
+    animation: cardsSlideUp 1s ease-out 0.9s backwards;
+  }
+
+  .info-card {
+    transition: all 0.3s ease;
+  }
+
+  .info-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(212, 175, 55, 0.5);
+  }
+
+  @keyframes heroFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes logoFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes titleSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes ctaScale {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes cardsSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Geometric animations */
+  .animate-spin-slow {
+    animation: spin 20s linear infinite;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
 }
