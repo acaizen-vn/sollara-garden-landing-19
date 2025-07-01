@@ -6,7 +6,7 @@ interface LiquidButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
   className?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'default' | 'lg';
 }
 
 const LiquidButton = ({ children, onClick, className = '', size = 'lg' }: LiquidButtonProps) => {
@@ -14,7 +14,7 @@ const LiquidButton = ({ children, onClick, className = '', size = 'lg' }: Liquid
 
   const sizeClasses = {
     sm: 'text-sm px-6 py-3',
-    md: 'text-base px-8 py-4',
+    default: 'text-base px-8 py-4',
     lg: 'text-lg px-12 py-6'
   };
 
