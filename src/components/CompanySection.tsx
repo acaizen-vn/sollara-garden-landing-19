@@ -76,30 +76,16 @@ const CompanySection = () => {
               </div>
             </div>
 
-            {/* Visual Element - Imagem da piscina com nova marca d'água */}
+            {/* Visual Element - Seção SEU LAR IDEAL apenas com gradiente */}
             <div className="animate-fade-in relative">
               <div className="relative overflow-hidden rounded-3xl shadow-2xl">
                 <div className="aspect-[4/5] lg:aspect-[3/4]">
-                  <img
-                    src="/lovable-uploads/73958ced-3768-4dc6-bf62-3959b12ebe83.png"
-                    alt="Área de lazer com piscina"
-                    className="w-full h-full object-cover"
-                  />
+                  {/* Fundo com gradiente colorido */}
+                  <div className="w-full h-full bg-gradient-to-br from-amber-900 via-amber-700 to-amber-600"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-amber-900/50 via-amber-700/30 to-amber-500/20"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-600/20 via-amber-500/10 to-orange-400/20"></div>
                   
-                  {/* Nova marca d'água com a imagem da área de lazer */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-15">
-                    <img
-                      src="/lovable-uploads/73958ced-3768-4dc6-bf62-3959b12ebe83.png"
-                      alt="Área de lazer translúcida"
-                      className="w-full h-full object-cover mix-blend-soft-light"
-                    />
-                  </div>
-                  
-                  {/* Overlay degradê sutil na paleta dourada/bege */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-amber-900/30 via-amber-700/20 to-amber-500/10"></div>
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-600/10 via-amber-500/5 to-orange-400/10"></div>
-                  
-                  {/* Texto sobreposto com melhor visibilidade */}
+                  {/* Texto sobreposto */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-center px-8">
                       <h3 className="font-sf-pro text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 drop-shadow-2xl tracking-tight">
