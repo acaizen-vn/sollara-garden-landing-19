@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { useAdmin } from '@/contexts/AdminContext';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
@@ -32,8 +31,8 @@ const VideoSection = () => {
     console.log('Extracted video ID:', videoId);
     
     if (videoId) {
-      // Use standard embed URL with autoplay parameters
-      const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&enablejsapi=1&origin=${window.location.origin}`;
+      // Use nocookie domain and remove problematic parameters
+      const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&controls=1&rel=0&modestbranding=1&playsinline=1`;
       console.log('Final embed URL:', embedUrl);
       return embedUrl;
     }
@@ -134,6 +133,7 @@ const VideoSection = () => {
                       frameBorder="0"
                       title="Sollara Garden - Apresentação"
                       loading="lazy"
+                      referrerPolicy="strict-origin-when-cross-origin"
                     />
                   </div>
                 ) : (
@@ -146,6 +146,7 @@ const VideoSection = () => {
                       muted={isMuted}
                       loop
                       playsInline
+                      preload="metadata"
                     />
                     
                     {/* Custom video controls */}

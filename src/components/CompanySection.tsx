@@ -76,27 +76,29 @@ const CompanySection = () => {
               </div>
             </div>
 
-            {/* Visual Element - Imagem da família com texto sobreposto */}
+            {/* Visual Element - Imagem com texto sobreposto aprimorado */}
             <div className="animate-fade-in relative">
               <div className="relative overflow-hidden rounded-3xl shadow-2xl">
-                <div className="aspect-[4/5]">
+                <div className="aspect-[4/5] lg:aspect-[3/4]">
                   <img
                     src="https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
                     alt="Família feliz - Grupo Salha Empreendimentos"
-                    className="w-full h-full object-cover opacity-60"
+                    className="w-full h-full object-cover opacity-40"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-luxury-brown/80 via-luxury-brown/20 to-transparent"></div>
+                  {/* Overlay dourado/bege aprimorado */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-amber-900/90 via-amber-700/60 to-amber-500/30"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-600/20 via-amber-500/10 to-orange-400/20"></div>
                   
-                  {/* Texto sobreposto */}
+                  {/* Texto sobreposto com melhor visibilidade */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-center px-8">
-                      <h3 className="font-sf-pro text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-2xl tracking-tight">
+                      <h3 className="font-sf-pro text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 drop-shadow-2xl tracking-tight">
                         SEU LAR
                       </h3>
-                      <h3 className="font-sf-pro text-4xl md:text-5xl font-bold text-luxury-gold mb-6 drop-shadow-2xl tracking-tight">
+                      <h3 className="font-sf-pro text-5xl md:text-6xl lg:text-7xl font-black text-luxury-gold mb-8 drop-shadow-2xl tracking-tight">
                         IDEAL
                       </h3>
-                      <p className="text-white/90 text-lg md:text-xl font-medium drop-shadow-lg max-w-sm mx-auto leading-relaxed">
+                      <p className="text-white text-xl md:text-2xl font-bold drop-shadow-2xl max-w-sm mx-auto leading-relaxed bg-black/30 backdrop-blur-sm px-6 py-3 rounded-2xl">
                         O sonho da casa própria está mais próximo do que você imagina
                       </p>
                     </div>

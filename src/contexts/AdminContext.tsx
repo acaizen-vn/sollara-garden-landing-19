@@ -74,57 +74,42 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     cnpj: '00.000.000/0001-00'
   });
 
-  // Carousel State - Apenas as 10 primeiras imagens
+  // Carousel State - Novas imagens do Sollara Garden
   const [carouselImages, setCarouselImages] = useState<CarouselImage[]>([
     {
       id: '1',
-      url: '/lovable-uploads/3e057a4c-5472-43d1-9559-aed684c23b2b.png',
-      alt: 'Casas modernas do Sollara Garden - Vista frontal das residências'
+      url: '/lovable-uploads/076d0f9c-cbe0-478a-a8e0-82a18c4be423.png',
+      alt: 'Vista aérea do condomínio Sollara Garden com área de lazer completa'
     },
     {
       id: '2',
-      url: '/lovable-uploads/230d7ba0-f969-4982-91ec-6ad5f202cdcd.png',
-      alt: 'Vista aérea do condomínio com área de lazer completa'
+      url: '/lovable-uploads/daec1aa2-95fd-4ad7-ad79-83d3e641f7f2.png',
+      alt: 'Fachadas modernas das casas do Sollara Garden'
     },
     {
       id: '3',
-      url: '/lovable-uploads/bd930467-f1c2-43e3-a9dd-356103dc95df.png',
-      alt: 'Área esportiva com quadra poliesportiva e piscina'
+      url: '/lovable-uploads/40772c9a-33d3-43d2-bc8a-b4cd636f28ae.png',
+      alt: 'Portaria moderna e elegante do condomínio Sollara Garden'
     },
     {
       id: '4',
-      url: '/lovable-uploads/de85cc7c-baa4-4c09-a3f4-be28b3ded2d2.png',
-      alt: 'Portaria moderna e elegante do condomínio'
+      url: '/lovable-uploads/d912767b-33c2-4fda-bc3a-e1a7d4c736f8.png',
+      alt: 'Área esportiva com quadra poliesportiva e piscina'
     },
     {
       id: '5',
-      url: '/lovable-uploads/01ff5adb-8b94-4939-9f7e-69e308a4e950.png',
-      alt: 'Fachadas das casas com design contemporâneo'
+      url: '/lovable-uploads/6f379a2e-244d-4691-8766-fc92f3f7e0ad.png',
+      alt: 'Casas modernas com design contemporâneo e garagem'
     },
     {
       id: '6',
-      url: '/lovable-uploads/617c932f-d57d-47d8-b749-99ddfe60c989.png',
-      alt: 'Área de piscina adulto com deck e lounges'
+      url: '/lovable-uploads/2c409d17-a74d-46d6-9e9d-6a235b388423.png',
+      alt: 'Vista das residências do condomínio com paisagismo'
     },
     {
       id: '7',
-      url: '/lovable-uploads/ab0c69b5-1548-40f5-9283-148fe297f7f6.png',
-      alt: 'Vista panorâmica do condomínio com paisagismo'
-    },
-    {
-      id: '8',
-      url: '/lovable-uploads/ef880c3a-6fab-4c98-8178-ef3430ef5ea9.png',
-      alt: 'Playground infantil com equipamentos modernos'
-    },
-    {
-      id: '9',
-      url: '/lovable-uploads/a0a122bb-6eaf-478d-a962-39e8f03201eb.png',
-      alt: 'Área de lazer com piscina e espaço gourmet'
-    },
-    {
-      id: '10',
-      url: '/lovable-uploads/7e70fce2-fd47-4b88-937f-99b337b7e622.png',
-      alt: 'Vista completa da área de lazer do condomínio'
+      url: '/lovable-uploads/e56958fd-6361-49ff-85dc-d56fe92fb9fb.png',
+      alt: 'Área de lazer com piscina e deck para relaxamento'
     }
   ]);
 
@@ -143,7 +128,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         if (data.heroVideoUrl) setHeroVideoUrl(data.heroVideoUrl);
         if (data.heroVideoType) setHeroVideoType(data.heroVideoType);
         if (data.heroBackgroundImage) setHeroBackgroundImage(data.heroBackgroundImage);
-        if (data.carouselImages) setCarouselImages(data.carouselImages);
+        // Não carregar carouselImages do localStorage para usar as novas imagens
         if (data.formSubmissions) setFormSubmissions(data.formSubmissions);
         if (data.footerContent) setFooterContent(data.footerContent);
       } catch (error) {
