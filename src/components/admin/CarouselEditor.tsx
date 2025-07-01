@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -6,17 +5,19 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAdmin } from '@/contexts/AdminContext';
 import { useToast } from '@/hooks/use-toast';
-import { Plus, Trash2, Edit2, Save, X } from 'lucide-react';
+import { Plus, Trash2, Edit2, Save, X, Upload } from 'lucide-react';
+import MultiImageUpload from './MultiImageUpload';
 
 const CarouselEditor = () => {
   const { carouselImages, addCarouselImage, removeCarouselImage, updateCarouselImage } = useAdmin();
   const { toast } = useToast();
   
   const [isAdding, setIsAdding] = useState(false);
+  const [showMultiUpload, setShowMultiUpload] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [newImage, setNewImage] = useState({ url: '', alt: '' });
 
-  const handleAddImage = () => {
+  const handleAddSingleImage = () => {
     if (!newImage.url.trim() || !newImage.alt.trim()) {
       toast({
         title: "Erro",
@@ -39,6 +40,18 @@ const CarouselEditor = () => {
       title: "Imagem adicionada!",
       description: "A nova imagem foi adicionada à galeria.",
     });
+  };
+
+  const handleMultipleImagesAdd = (images: { url: string; alt: string }[]) => {
+    images.forEach((img, index) => {
+      addCarouselImage({
+        id: (Date.now() + index).toString(),
+        url: img.url,
+        alt: img.alt
+      });
+    });
+    
+    setShowMultiUpload(false);
   };
 
   const handleUpdateImage = (id: string, url: string, alt: string) => {
@@ -72,12 +85,48 @@ const CarouselEditor = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-medium">Imagens da Galeria ({carouselImages.length})</h3>
-        <Button onClick={() => setIsAdding(true)} disabled={isAdding}>
-          <Plus className="w-4 h-4 mr-2" />
-          Adicionar Imagem
-        </Button>
+        <div className="flex space-x-2">
+          <Button 
+            onClick={() => setShowMultiUpload(true)} 
+            disabled={isAdding || showMultiUpload}
+            variant="default"
+          >
+            <Upload className="w-4 h-4 mr-2" />
+            Upload Múltiplo
+          </Button>
+          <Button 
+            onClick={() => setIsAdding(true)} 
+            disabled={isAdding || showMultiUpload}
+            variant="outline"
+          >
+            <Plus className="w-4 h-4 mr-2" />
+            Adicionar Uma
+          </Button>
+        </div>
       </div>
 
+      {/* Multi-image upload */}
+      {showMultiUpload && (
+        <Card>
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <CardTitle>Upload Múltiplo de Imagens</CardTitle>
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => setShowMultiUpload(false)}
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <MultiImageUpload onImagesAdd={handleMultipleImagesAdd} />
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Single image add */}
       {isAdding && (
         <Card>
           <CardHeader>
@@ -105,7 +154,7 @@ const CarouselEditor = () => {
               />
             </div>
             <div className="flex space-x-2">
-              <Button onClick={handleAddImage}>
+              <Button onClick={handleAddSingleImage}>
                 <Save className="w-4 h-4 mr-2" />
                 Salvar
               </Button>
@@ -118,6 +167,7 @@ const CarouselEditor = () => {
         </Card>
       )}
 
+      {/* Existing images grid */}
       <div className="grid gap-4 md:grid-cols-2">
         {carouselImages.map((image) => (
           <ImageCard

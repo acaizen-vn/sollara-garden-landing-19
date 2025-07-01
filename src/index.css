@@ -1,11 +1,11 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Premium design system for Sollara Garden */
+/* Modern design system for Sollara Garden */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -36,7 +36,7 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
   }
 
   * {
@@ -44,22 +44,25 @@
   }
 
   body {
-    @apply bg-background text-foreground font-crimson;
-    cursor: auto; /* Default cursor for better usability */
+    @apply bg-background text-foreground font-inter;
+    font-feature-settings: "cv11", "ss01";
+    font-variation-settings: "opsz" 32;
+    cursor: auto;
   }
 
   html {
     scroll-behavior: smooth;
   }
 
-  /* Typography System */
+  /* Modern Typography System */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-playfair;
+    @apply font-sf-pro;
+    font-feature-settings: "ss01", "cv01", "cv03";
   }
 
-  /* Custom premium styles */
+  /* Modern premium styles */
   .luxury-gradient {
-    background: linear-gradient(135deg, #3E2C23 0%, #2A1B14 100%);
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
   }
 
   .luxury-red-gradient {
@@ -70,173 +73,66 @@
     background: linear-gradient(135deg, #D4AF37 0%, #B8941F 100%);
   }
 
-  .vintage-overlay {
-    background: linear-gradient(45deg, 
-      rgba(139, 21, 56, 0.15) 0%, 
-      rgba(212, 175, 55, 0.1) 25%,
-      rgba(62, 44, 35, 0.2) 50%,
-      rgba(139, 21, 56, 0.1) 75%,
-      rgba(212, 175, 55, 0.15) 100%
-    );
-  }
-
-  .text-shadow {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  }
-
-  .glass-effect {
-    backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.1);
+  .modern-glass {
+    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   }
 
-  .glass-red-effect {
-    backdrop-filter: blur(10px);
-    background: rgba(139, 21, 56, 0.1);
-    border: 1px solid rgba(139, 21, 56, 0.3);
+  .modern-card {
+    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   }
 
-  /* Enhanced hover effects */
-  .hover-lift:hover {
-    transform: translateY(-8px) rotateX(5deg);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  /* Subtle hover effects only */
+  .hover-subtle:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
   }
 
-  .hover-3d:hover {
-    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) translateZ(20px);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* Simple fade animation */
+  .fade-in {
+    animation: simple-fade 0.6s ease-out forwards;
   }
 
-  .hover-red:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(139, 21, 56, 0.3);
-    transition: all 0.3s ease;
-  }
-
-  /* Advanced animations */
-  .section-enter {
-    animation: fade-in 0.8s ease-out forwards;
-  }
-
-  .shimmer {
-    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
-    animation: shimmer 2s infinite;
-  }
-
-  .red-shimmer {
-    background: linear-gradient(90deg, transparent, rgba(139, 21, 56, 0.4), transparent);
-    animation: shimmer 2s infinite;
-  }
-
-  .pulse-glow {
-    animation: pulse-glow 2s infinite;
-  }
-
-  .pulse-red-glow {
-    animation: vintage-glow 3s infinite;
-  }
-
-  @keyframes pulse-glow {
-    0%, 100% {
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+  @keyframes simple-fade {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
     }
-    50% {
-      box-shadow: 0 0 40px rgba(212, 175, 55, 0.8);
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
-  }
-
-  .morphing-border {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .morphing-border::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    padding: 2px;
-    background: linear-gradient(45deg, #D4AF37, #8B1538, #D4AF37);
-    border-radius: inherit;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: xor;
-    animation: rotate 3s linear infinite;
-  }
-
-  @keyframes rotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
-  /* Vintage texture effect */
-  .vintage-texture::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-      radial-gradient(circle at 20% 50%, rgba(139, 21, 56, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 40% 80%, rgba(62, 44, 35, 0.1) 0%, transparent 50%);
-    mix-blend-mode: overlay;
-    pointer-events: none;
-  }
-
-  /* Film grain effect */
-  .film-grain::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxmaWx0ZXIgaWQ9Im5vaXNlIiB4PSIwJSIgeT0iMCUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPgogICAgICA8ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9IjAuOSIgbnVtT2N0YXZlcz0iNCIgcmVzdWx0PSJub2lzZSIgc2VlZD0iMSIgLz4KICAgICAgPGZlQ29sb3JNYXRyaXggaW49Im5vaXNlIiB0eXBlPSJzYXR1cmF0ZSIgdmFsdWVzPSIwIiAvPgogICAgPC9maWx0ZXI+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuMDUiIC8+Cjwvc3ZnPg==");
-    opacity: 0.3;
-    mix-blend-mode: overlay;
-    pointer-events: none;
   }
 }
 
 @layer components {
-  .btn-primary {
-    @apply bg-luxury-gold hover:bg-luxury-gold-dark text-luxury-brown font-semibold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl uppercase tracking-wide;
+  .btn-modern {
+    @apply bg-luxury-gold hover:bg-luxury-gold-dark text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 hover:shadow-lg;
   }
 
-  .btn-red {
-    @apply bg-luxury-red hover:bg-luxury-red-dark text-white font-semibold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-glow uppercase tracking-wide;
+  .btn-modern-red {
+    @apply bg-luxury-red hover:bg-luxury-red-dark text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 hover:shadow-lg;
   }
 
-  .btn-secondary {
-    @apply border-2 border-luxury-gold text-luxury-gold hover:bg-luxury-gold hover:text-luxury-brown font-semibold py-3 px-6 rounded-full transition-all duration-300 uppercase tracking-wide;
+  .section-title-modern {
+    @apply font-sf-pro text-3xl md:text-4xl font-semibold text-gray-900 mb-6 tracking-tight;
   }
 
-  .btn-red-secondary {
-    @apply border-2 border-luxury-red text-luxury-red hover:bg-luxury-red hover:text-white font-semibold py-3 px-6 rounded-full transition-all duration-300 uppercase tracking-wide hover-red;
+  .section-subtitle-modern {
+    @apply text-lg text-gray-600 mb-8 font-inter font-normal leading-relaxed;
   }
 
-  .section-title {
-    @apply font-playfair text-4xl md:text-5xl font-bold text-luxury-brown mb-6 uppercase tracking-wide;
+  .card-modern {
+    @apply modern-card rounded-2xl p-6 hover-subtle;
   }
 
-  .section-subtitle {
-    @apply text-lg md:text-xl text-luxury-brown-light mb-8 font-crimson;
-  }
-
-  .card-premium {
-    @apply bg-white/90 backdrop-blur-sm border border-luxury-gold/20 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover-3d;
-  }
-
-  .card-red {
-    @apply bg-white/90 backdrop-blur-sm border border-luxury-red/20 rounded-3xl p-8 shadow-xl hover:shadow-red-glow transition-all duration-500 hover-red;
-  }
-
-  .gradient-text {
-    @apply bg-gradient-to-r from-luxury-gold via-luxury-gold-light to-luxury-gold bg-clip-text text-transparent;
-  }
-
-  .gradient-red-text {
-    @apply bg-gradient-to-r from-luxury-red via-luxury-red-light to-luxury-red-accent bg-clip-text text-transparent;
+  .glass-modern {
+    @apply modern-glass rounded-2xl p-6;
   }
 }

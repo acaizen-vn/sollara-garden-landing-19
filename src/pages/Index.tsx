@@ -8,16 +8,11 @@ import CompanySection from '@/components/CompanySection';
 import ContactForm from '@/components/ContactForm';
 import Footer from '@/components/Footer';
 import ScrollIndicator from '@/components/effects/ScrollIndicator';
-import CustomCursor from '@/components/effects/CustomCursor';
 
 const Index = () => {
   return (
     <div className="min-h-screen">
       <ScrollIndicator />
-      {/* CustomCursor will be active everywhere except hero section */}
-      <div className="cursor-none">
-        <CustomCursor />
-      </div>
       <HeroSection />
       <AboutSection />
       <ImageCarousel />

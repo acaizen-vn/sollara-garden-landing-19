@@ -1,7 +1,5 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Settings } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -19,18 +17,9 @@ const Footer = () => {
             </div>
             
             <div className="border-t border-white/20 pt-8">
-              <div className="flex items-center justify-center space-x-4">
-                <p className="text-white/60 text-sm">
-                  © {new Date().getFullYear()} Sollara Garden. Todos os direitos reservados.
-                </p>
-                <Link 
-                  to="/admin"
-                  className="inline-flex items-center text-white/40 hover:text-white/60 text-sm transition-colors"
-                  title="Painel Administrativo"
-                >
-                  <Settings className="w-4 h-4" />
-                </Link>
-              </div>
+              <p className="text-white/60 text-sm">
+                © {new Date().getFullYear()} Sollara Garden. Todos os direitos reservados.
+              </p>
             </div>
           </div>
         </div>
