@@ -4,10 +4,10 @@ import { Award, Users, Calendar } from 'lucide-react';
 
 const CompanySection = () => {
   return (
-    <section className="py-20 bg-luxury-beige">
+    <section className="py-12 bg-luxury-beige">
       <div className="container mx-auto px-4 md:px-8">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16 animate-fade-in">
+          <div className="text-center mb-12 animate-fade-in">
             <h2 className="section-title">
               GRUPO SALHA EMPREENDIMENTOS
             </h2>
@@ -76,16 +76,31 @@ const CompanySection = () => {
               </div>
             </div>
 
-            {/* Visual Element - Imagem da família */}
-            <div className="animate-fade-in">
-              <div className="relative">
-                <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
+            {/* Visual Element - Imagem da família com texto sobreposto */}
+            <div className="animate-fade-in relative">
+              <div className="relative overflow-hidden rounded-3xl shadow-2xl">
+                <div className="aspect-[4/5]">
                   <img
                     src="https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
                     alt="Família feliz - Grupo Salha Empreendimentos"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover opacity-60"
                   />
-                  <div className="absolute inset-0 bg-luxury-brown/10"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-luxury-brown/80 via-luxury-brown/20 to-transparent"></div>
+                  
+                  {/* Texto sobreposto */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center px-8">
+                      <h3 className="font-sf-pro text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-2xl tracking-tight">
+                        SEU LAR
+                      </h3>
+                      <h3 className="font-sf-pro text-4xl md:text-5xl font-bold text-luxury-gold mb-6 drop-shadow-2xl tracking-tight">
+                        IDEAL
+                      </h3>
+                      <p className="text-white/90 text-lg md:text-xl font-medium drop-shadow-lg max-w-sm mx-auto leading-relaxed">
+                        O sonho da casa própria está mais próximo do que você imagina
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
