@@ -18,8 +18,11 @@ const ScrollIndicator = () => {
   return (
     <div className="fixed top-0 left-0 w-full h-1 bg-black/10 z-50">
       <div 
-        className="h-full bg-gradient-to-r from-luxury-gold to-luxury-gold-light transition-all duration-300 ease-out"
-        style={{ width: `${scrollProgress}%` }}
+        className="h-full bg-gradient-to-r from-luxury-red via-luxury-gold to-luxury-red-accent transition-all duration-300 ease-out shadow-sm"
+        style={{ 
+          width: `${scrollProgress}%`,
+          boxShadow: '0 0 10px rgba(139, 21, 56, 0.4)'
+        }}
       />
     </div>
   );

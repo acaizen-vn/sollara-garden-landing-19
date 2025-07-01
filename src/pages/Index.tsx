@@ -14,7 +14,10 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <ScrollIndicator />
-      <CustomCursor />
+      {/* CustomCursor will be active everywhere except hero section */}
+      <div className="cursor-none">
+        <CustomCursor />
+      </div>
       <HeroSection />
       <AboutSection />
       <ImageCarousel />

@@ -26,37 +26,49 @@ const LiquidButton = ({ children, onClick, className = '', size = 'lg' }: Liquid
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className={`
-          relative overflow-hidden font-semibold uppercase tracking-wide
-          bg-luxury-gold hover:bg-luxury-gold-dark text-luxury-brown
+          relative overflow-hidden font-semibold uppercase tracking-wide font-playfair
+          bg-gradient-to-r from-luxury-red via-luxury-red-accent to-luxury-red 
+          hover:from-luxury-red-dark hover:via-luxury-red hover:to-luxury-red-accent 
+          text-white border-2 border-luxury-red/30
           transition-all duration-500 transform hover:scale-105
-          shadow-lg hover:shadow-2xl rounded-full
+          shadow-red-glow hover:shadow-vintage rounded-full
           ${sizeClasses[size]} ${className}
         `}
       >
-        {/* Liquid effect background */}
+        {/* Enhanced liquid effect background with red gradient */}
         <div 
           className={`
-            absolute inset-0 bg-gradient-to-r from-luxury-gold-light via-luxury-gold to-luxury-gold-dark
+            absolute inset-0 bg-gradient-to-r from-luxury-gold-light via-luxury-red-light to-luxury-gold-light
             transform transition-transform duration-700 ease-out
             ${isHovered ? 'scale-150 rotate-12' : 'scale-0 rotate-0'}
           `}
           style={{ 
             borderRadius: '50%',
             transformOrigin: 'center',
+            mixBlendMode: 'overlay',
           }}
         />
         
-        {/* Ripple effect */}
+        {/* Enhanced ripple effect with vintage touch */}
         <div 
           className={`
-            absolute inset-0 bg-white/20 rounded-full
+            absolute inset-0 bg-gradient-to-r from-white/20 via-luxury-gold/30 to-white/20 rounded-full
             transform transition-all duration-500 ease-out
             ${isHovered ? 'scale-110 opacity-0' : 'scale-0 opacity-100'}
           `}
         />
         
-        {/* Content */}
-        <span className="relative z-10 font-bold">
+        {/* Vintage glow ring */}
+        <div 
+          className={`
+            absolute inset-0 border-2 border-luxury-gold/50 rounded-full
+            transform transition-all duration-300 ease-out
+            ${isHovered ? 'scale-105 opacity-100' : 'scale-100 opacity-0'}
+          `}
+        />
+        
+        {/* Content with enhanced typography */}
+        <span className="relative z-10 font-bold text-shadow">
           {children}
         </span>
       </Button>

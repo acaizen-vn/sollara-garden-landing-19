@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -53,7 +52,7 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				// Premium color scheme for Sollara Garden
+				// Premium color scheme for Sollara Garden with elegant red palette
 				luxury: {
 					brown: '#3E2C23',
 					'brown-light': '#5A4038',
@@ -62,7 +61,12 @@ export default {
 					'gold-light': '#F4E4BC',
 					'gold-dark': '#B8941F',
 					cream: '#F8F6F1',
-					beige: '#E8E0D6'
+					beige: '#E8E0D6',
+					// New sophisticated red palette from shield
+					red: '#8B1538',
+					'red-light': '#A64B66',
+					'red-dark': '#6B1028',
+					'red-accent': '#B8002B'
 				}
 			},
 			borderRadius: {
@@ -158,6 +162,14 @@ export default {
 					'100%': {
 						transform: 'translateX(100%)'
 					}
+				},
+				'vintage-glow': {
+					'0%, 100%': {
+						boxShadow: '0 0 30px rgba(139, 21, 56, 0.3)'
+					},
+					'50%': {
+						boxShadow: '0 0 50px rgba(139, 21, 56, 0.5)'
+					}
 				}
 			},
 			animation: {
@@ -170,16 +182,20 @@ export default {
 				'glow': 'glow 2s ease-in-out infinite alternate',
 				'morph': 'morph 4s ease-in-out infinite',
 				'ripple': 'ripple 0.6s linear',
-				'shimmer': 'shimmer 2s linear infinite'
+				'shimmer': 'shimmer 2s linear infinite',
+				'vintage-glow': 'vintage-glow 3s ease-in-out infinite'
 			},
 			fontFamily: {
 				'playfair': ['Playfair Display', 'serif'],
+				'crimson': ['Crimson Text', 'serif'],
 				'inter': ['Inter', 'sans-serif'],
 			},
 			boxShadow: {
 				'3xl': '0 35px 60px -12px rgba(0, 0, 0, 0.25)',
 				'glow': '0 0 20px rgba(212, 175, 55, 0.5)',
 				'glow-lg': '0 0 40px rgba(212, 175, 55, 0.8)',
+				'red-glow': '0 0 30px rgba(139, 21, 56, 0.4)',
+				'vintage': '0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
 			},
 			backdropBlur: {
 				xs: '2px',
