@@ -76,18 +76,18 @@ const CompanySection = () => {
               </div>
             </div>
 
-            {/* Visual Element - Imagem com texto sobreposto aprimorado */}
+            {/* Visual Element - Nova imagem da piscina com degradê sutil */}
             <div className="animate-fade-in relative">
               <div className="relative overflow-hidden rounded-3xl shadow-2xl">
                 <div className="aspect-[4/5] lg:aspect-[3/4]">
                   <img
-                    src="https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                    alt="Família feliz - Grupo Salha Empreendimentos"
-                    className="w-full h-full object-cover opacity-40"
+                    src="/lovable-uploads/73958ced-3768-4dc6-bf62-3959b12ebe83.png"
+                    alt="Área de lazer com piscina - Sollara Garden"
+                    className="w-full h-full object-cover"
                   />
-                  {/* Overlay dourado/bege aprimorado */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-amber-900/90 via-amber-700/60 to-amber-500/30"></div>
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-600/20 via-amber-500/10 to-orange-400/20"></div>
+                  {/* Overlay degradê sutil na paleta dourada/bege */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-amber-900/30 via-amber-700/20 to-amber-500/10"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-600/10 via-amber-500/5 to-orange-400/10"></div>
                   
                   {/* Texto sobreposto com melhor visibilidade */}
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -98,7 +98,7 @@ const CompanySection = () => {
                       <h3 className="font-sf-pro text-5xl md:text-6xl lg:text-7xl font-black text-luxury-gold mb-8 drop-shadow-2xl tracking-tight">
                         IDEAL
                       </h3>
-                      <p className="text-white text-xl md:text-2xl font-bold drop-shadow-2xl max-w-sm mx-auto leading-relaxed bg-black/30 backdrop-blur-sm px-6 py-3 rounded-2xl">
+                      <p className="text-white text-xl md:text-2xl font-bold drop-shadow-2xl max-w-sm mx-auto leading-relaxed bg-black/20 backdrop-blur-sm px-6 py-3 rounded-2xl">
                         O sonho da casa própria está mais próximo do que você imagina
                       </p>
                     </div>
