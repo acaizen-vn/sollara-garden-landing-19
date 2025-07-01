@@ -24,22 +24,79 @@ const MultiImageUpload: React.FC<MultiImageUploadProps> = ({ onImagesAdd }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
-  const handleFileSelect = (files: FileList) => {
+  // Função para converter arquivo para base64
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = error => reject(error);
+    });
+  };
+
+  // Função para comprimir imagem
+  const compressImage = (file: File, quality: number = 0.8): Promise<string> => {
+    return new Promise((resolve) => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      
+      img.onload = () => {
+        // Calcular dimensões mantendo aspect ratio
+        const maxWidth = 1200;
+        const maxHeight = 800;
+        let { width, height } = img;
+        
+        if (width > height) {
+          if (width > maxWidth) {
+            height = (height * maxWidth) / width;
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width = (width * maxHeight) / height;
+            height = maxHeight;
+          }
+        }
+        
+        canvas.width = width;
+        canvas.height = height;
+        
+        ctx?.drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      
+      img.src = URL.createObjectURL(file);
+    });
+  };
+
+  const handleFileSelect = async (files: FileList) => {
     const newImages: ImageWithCaption[] = [];
     
-    Array.from(files).forEach((file) => {
+    for (const file of Array.from(files)) {
       if (file.type.startsWith('image/')) {
         const id = Date.now().toString() + Math.random().toString(36).substr(2, 9);
-        const url = URL.createObjectURL(file);
         
-        newImages.push({
-          file,
-          url,
-          caption: '',
-          id
-        });
+        try {
+          // Comprimir imagem para melhor performance
+          const compressedUrl = await compressImage(file);
+          
+          newImages.push({
+            file,
+            url: compressedUrl,
+            caption: '',
+            id
+          });
+        } catch (error) {
+          console.error('Erro ao processar imagem:', error);
+          toast({
+            title: "Erro ao processar imagem",
+            description: `Não foi possível processar ${file.name}`,
+            variant: "destructive"
+          });
+        }
       }
-    });
+    }
 
     setSelectedImages(prev => [...prev, ...newImages]);
   };
@@ -61,15 +118,7 @@ const MultiImageUpload: React.FC<MultiImageUploadProps> = ({ onImagesAdd }) => {
   };
 
   const removeImage = (id: string) => {
-    setSelectedImages(prev => {
-      const updated = prev.filter(img => img.id !== id);
-      // Clean up object URLs
-      const removed = prev.find(img => img.id === id);
-      if (removed) {
-        URL.revokeObjectURL(removed.url);
-      }
-      return updated;
-    });
+    setSelectedImages(prev => prev.filter(img => img.id !== id));
   };
 
   const handleUpload = async () => {
@@ -85,9 +134,9 @@ const MultiImageUpload: React.FC<MultiImageUploadProps> = ({ onImagesAdd }) => {
     setIsUploading(true);
 
     try {
-      // Simulate upload process - in real app, upload to server/cloud
+      // Converter todas as imagens para formato persistente
       const uploadedImages = selectedImages.map(img => ({
-        url: img.url, // In real app, this would be the uploaded URL
+        url: img.url, // Usando a URL comprimida em base64
         alt: img.caption || `Imagem ${img.id}`
       }));
 
@@ -98,11 +147,11 @@ const MultiImageUpload: React.FC<MultiImageUploadProps> = ({ onImagesAdd }) => {
         description: `${selectedImages.length} imagem(ns) foram adicionadas à galeria.`,
       });
 
-      // Clean up
-      selectedImages.forEach(img => URL.revokeObjectURL(img.url));
+      // Limpar estado
       setSelectedImages([]);
       
     } catch (error) {
+      console.error('Erro no upload:', error);
       toast({
         title: "Erro no upload",
         description: "Ocorreu um erro ao adicionar as imagens.",
@@ -115,9 +164,9 @@ const MultiImageUpload: React.FC<MultiImageUploadProps> = ({ onImagesAdd }) => {
 
   return (
     <div className="space-y-6">
-      {/* Drop Zone */}
+      {/* Drop Zone com design moderno */}
       <Card 
-        className="border-2 border-dashed border-gray-300 hover:border-gray-400 transition-colors cursor-pointer"
+        className="border-2 border-dashed border-gray-300 hover:border-gray-400 transition-colors cursor-pointer bg-gray-50/50"
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         onClick={() => fileInputRef.current?.click()}
@@ -129,6 +178,9 @@ const MultiImageUpload: React.FC<MultiImageUploadProps> = ({ onImagesAdd }) => {
           </h3>
           <p className="text-gray-500 mb-4">
             Arraste e solte imagens aqui ou clique para selecionar
+          </p>
+          <p className="text-sm text-gray-400 mb-4">
+            Formatos aceitos: JPG, PNG, WebP (máx. 10MB cada)
           </p>
           <Button variant="outline" type="button">
             <Plus className="w-4 h-4 mr-2" />
@@ -146,7 +198,7 @@ const MultiImageUpload: React.FC<MultiImageUploadProps> = ({ onImagesAdd }) => {
         onChange={(e) => e.target.files && handleFileSelect(e.target.files)}
       />
 
-      {/* Selected Images Grid */}
+      {/* Preview das imagens selecionadas */}
       {selectedImages.length > 0 && (
         <div className="space-y-4">
           <h3 className="text-lg font-medium">
@@ -161,6 +213,7 @@ const MultiImageUpload: React.FC<MultiImageUploadProps> = ({ onImagesAdd }) => {
                     src={image.url}
                     alt="Preview"
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                   <Button
                     variant="destructive"
@@ -203,10 +256,7 @@ const MultiImageUpload: React.FC<MultiImageUploadProps> = ({ onImagesAdd }) => {
             </Button>
             <Button 
               variant="outline" 
-              onClick={() => {
-                selectedImages.forEach(img => URL.revokeObjectURL(img.url));
-                setSelectedImages([]);
-              }}
+              onClick={() => setSelectedImages([])}
               disabled={isUploading}
             >
               Limpar Tudo

@@ -2,6 +2,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useAdmin } from '@/contexts/AdminContext';
+import { Play, Pause } from 'lucide-react';
 
 const HeroVideo = () => {
   const { heroVideoUrl } = useAdmin();
@@ -10,8 +11,10 @@ const HeroVideo = () => {
   const [isVideoLoading, setIsVideoLoading] = useState(true);
   const [hasVideoError, setHasVideoError] = useState(false);
   const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [showControls, setShowControls] = useState(false);
 
-  // Lazy load video when user scrolls near the section
+  // Lazy load video quando usuário rola perto da seção
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -35,33 +38,44 @@ const HeroVideo = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Handle video playback when in view
+  // Gerenciar reprodução do vídeo
   useEffect(() => {
     if (!heroVideoUrl || !videoRef.current || !shouldLoadVideo) return;
 
     const video = videoRef.current;
     
     const handleLoadStart = () => setIsVideoLoading(true);
-    const handleCanPlay = () => setIsVideoLoading(false);
+    const handleCanPlay = () => {
+      setIsVideoLoading(false);
+      setHasVideoError(false);
+    };
     const handleError = () => {
       setHasVideoError(true);
       setIsVideoLoading(false);
     };
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
 
     video.addEventListener('loadstart', handleLoadStart);
     video.addEventListener('canplay', handleCanPlay);
     video.addEventListener('error', handleError);
+    video.addEventListener('play', handlePlay);
+    video.addEventListener('pause', handlePause);
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          setIsVideoInView(entry.isIntersecting);
+          
           if (entry.isIntersecting) {
-            setIsVideoInView(true);
-            video.play().catch(() => {
-              console.log('Autoplay prevented');
-            });
+            // Auto-play apenas se não houve interação manual
+            if (!showControls) {
+              video.play().catch(() => {
+                console.log('Autoplay prevented by browser');
+                setShowControls(true); // Mostrar controles se autoplay falhar
+              });
+            }
           } else {
-            setIsVideoInView(false);
             video.pause();
           }
         });
@@ -79,63 +93,95 @@ const HeroVideo = () => {
       video.removeEventListener('loadstart', handleLoadStart);
       video.removeEventListener('canplay', handleCanPlay);
       video.removeEventListener('error', handleError);
+      video.removeEventListener('play', handlePlay);
+      video.removeEventListener('pause', handlePause);
     };
-  }, [heroVideoUrl, shouldLoadVideo]);
+  }, [heroVideoUrl, shouldLoadVideo, showControls]);
+
+  const togglePlayPause = () => {
+    if (!videoRef.current) return;
+    
+    setShowControls(true);
+    
+    if (isPlaying) {
+      videoRef.current.pause();
+    } else {
+      videoRef.current.play();
+    }
+  };
 
   if (!heroVideoUrl) return null;
 
   return (
-    <div className="animate-slide-in-right max-w-2xl mx-auto">
-      <div className="relative rounded-3xl overflow-hidden shadow-vintage bg-black/20 backdrop-blur-md border-2 border-luxury-red/30 group morphing-border">
+    <div className="fade-in max-w-2xl mx-auto">
+      <div className="relative rounded-2xl overflow-hidden shadow-modern bg-black/5 border border-gray-200/50 group">
         {/* Loading Skeleton */}
         {isVideoLoading && !hasVideoError && (
           <div className="absolute inset-0 z-20 flex items-center justify-center">
-            <Skeleton className="w-full h-96 bg-black/40" />
+            <Skeleton className="w-full h-96 bg-gray-200" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-12 h-12 border-4 border-luxury-red border-t-transparent rounded-full animate-spin"></div>
+              <div className="w-12 h-12 border-4 border-luxury-gold border-t-transparent rounded-full animate-spin"></div>
             </div>
           </div>
         )}
 
-        {/* Video Element with enhanced effects */}
+        {/* Vídeo otimizado */}
         {shouldLoadVideo && (
           <div className="relative">
             <video
               ref={videoRef}
               src={heroVideoUrl}
-              className="w-full h-auto max-h-96 object-cover transition-all duration-500 group-hover:scale-105"
-              muted
+              className="w-full h-auto max-h-96 object-cover transition-all duration-300"
+              muted={!showControls}
               loop
               playsInline
-              preload="none"
-              controls={false}
+              preload="metadata"
+              controls={showControls}
               style={{
-                filter: 'brightness(90%) contrast(120%) sepia(8%)',
                 opacity: isVideoLoading ? 0 : 1,
-                transition: 'opacity 0.3s ease, transform 0.5s ease'
+                transition: 'opacity 0.3s ease'
               }}
             />
-            {/* Enhanced vintage film overlay with red undertones */}
-            <div className="absolute inset-0 bg-gradient-to-t from-luxury-red/15 via-transparent to-luxury-gold/10 opacity-70 group-hover:opacity-50 transition-opacity duration-500" />
-            <div className="absolute inset-0 bg-gradient-to-br from-luxury-red/10 via-transparent to-luxury-red/5 opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
+            
+            {/* Controle de play/pause personalizado */}
+            {!showControls && !isVideoLoading && !hasVideoError && (
+              <button
+                onClick={togglePlayPause}
+                className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              >
+                <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center backdrop-blur-sm">
+                  {isPlaying ? (
+                    <Pause className="w-6 h-6 text-gray-700" />
+                  ) : (
+                    <Play className="w-6 h-6 text-gray-700 ml-1" />
+                  )}
+                </div>
+              </button>
+            )}
+            
+            {/* Overlay sutil */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none" />
           </div>
         )}
 
-        {/* Error Fallback */}
+        {/* Fallback para erro */}
         {hasVideoError && (
-          <div className="w-full h-96 flex items-center justify-center bg-black/40 text-white">
-            <p className="text-lg font-cormorant">Erro ao carregar o vídeo</p>
+          <div className="w-full h-96 flex items-center justify-center bg-gray-100 text-gray-500">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-4 mx-auto">
+                <Play className="w-6 h-6" />
+              </div>
+              <p className="text-lg font-medium">Vídeo não disponível</p>
+              <p className="text-sm">Tente novamente mais tarde</p>
+            </div>
           </div>
         )}
-        
-        {/* Enhanced vintage overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
       </div>
       
-      {/* Enhanced indicator with red accent */}
-      <div className="mt-6 flex justify-center">
-        <div className={`w-3 h-3 rounded-full transition-all duration-300 ${
-          isVideoInView ? 'bg-luxury-red animate-vintage-glow shadow-lg shadow-luxury-red/50' : 'bg-white/30'
+      {/* Indicador de status */}
+      <div className="mt-4 flex justify-center">
+        <div className={`w-2 h-2 rounded-full transition-all duration-300 ${
+          isVideoInView && !hasVideoError ? 'bg-luxury-gold' : 'bg-gray-300'
         }`} />
       </div>
     </div>
