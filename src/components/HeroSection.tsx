@@ -1,21 +1,48 @@
 
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Play } from 'lucide-react';
 import { useAdmin } from '@/contexts/AdminContext';
 
 const HeroSection = () => {
   const { heroTitle, heroSubtitle, heroDescription, heroVideoUrl, heroBackgroundImage } = useAdmin();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVideoInView, setIsVideoInView] = useState(false);
   
   const scrollToContact = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleVideoClick = () => {
-    if (heroVideoUrl) {
-      window.open(heroVideoUrl, '_blank');
-    }
-  };
+  useEffect(() => {
+    if (!heroVideoUrl || !videoRef.current) return;
+
+    const video = videoRef.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVideoInView(true);
+            video.play().catch(() => {
+              // Fallback se autoplay falhar
+              console.log('Autoplay prevented');
+            });
+          } else {
+            setIsVideoInView(false);
+            video.pause();
+          }
+        });
+      },
+      {
+        threshold: 0.5, // Reproduz quando 50% do vídeo está visível
+        rootMargin: '-10% 0px -10% 0px'
+      }
+    );
+
+    observer.observe(video);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [heroVideoUrl]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -51,28 +78,52 @@ const HeroSection = () => {
           </p>
           
           {/* CTA Button */}
-          <div className="animate-scale-in">
+          <div className="animate-scale-in mb-12">
             <Button
               size="lg"
               onClick={scrollToContact}
-              className="btn-primary text-lg px-12 py-6 mb-12"
+              className="btn-primary text-lg px-12 py-6"
             >
               QUERO SABER MAIS
             </Button>
           </div>
           
-          {/* Video Preview */}
+          {/* Video Player */}
           {heroVideoUrl && (
-            <div className="animate-slide-in-right">
-              <div 
-                className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/10 backdrop-blur-md border border-white/20 cursor-pointer hover:bg-white/20 transition-all duration-300 hover:scale-110"
-                onClick={handleVideoClick}
-              >
-                <Play className="w-8 h-8 text-white ml-1" fill="white" />
+            <div className="animate-slide-in-right max-w-2xl mx-auto">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-black/20 backdrop-blur-md border border-white/10">
+                <video
+                  ref={videoRef}
+                  src={heroVideoUrl}
+                  className="w-full h-auto max-h-96 object-cover"
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  style={{
+                    filter: 'brightness(0.9) contrast(1.1)',
+                  }}
+                />
+                
+                {/* Elegant Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+                
+                {/* Video Label */}
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                  <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
+                    <p className="text-white/90 text-sm uppercase tracking-wide font-inter">
+                      Vídeo Institucional
+                    </p>
+                  </div>
+                </div>
               </div>
-              <p className="text-white/80 mt-4 text-sm uppercase tracking-wide">
-                ASSISTA O VÍDEO INSTITUCIONAL
-              </p>
+              
+              {/* Subtle indicator */}
+              <div className="mt-4 flex justify-center">
+                <div className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  isVideoInView ? 'bg-luxury-gold animate-pulse' : 'bg-white/30'
+                }`} />
+              </div>
             </div>
           )}
         </div>
