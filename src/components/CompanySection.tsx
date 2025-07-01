@@ -76,7 +76,7 @@ const CompanySection = () => {
               </div>
             </div>
 
-            {/* Visual Element - Nova imagem da piscina com degradê sutil */}
+            {/* Visual Element - Imagem da piscina com marca d'água da fachada */}
             <div className="animate-fade-in relative">
               <div className="relative overflow-hidden rounded-3xl shadow-2xl">
                 <div className="aspect-[4/5] lg:aspect-[3/4]">
@@ -85,9 +85,18 @@ const CompanySection = () => {
                     alt="Área de lazer com piscina - Sollara Garden"
                     className="w-full h-full object-cover"
                   />
+                  {/* Marca d'água da fachada - translúcida */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-20">
+                    <img
+                      src="/lovable-uploads/c67509dc-b8fd-4b63-a711-7737584ea409.png"
+                      alt="Fachada Sollara Garden"
+                      className="w-full h-full object-contain mix-blend-overlay"
+                    />
+                  </div>
+                  
                   {/* Overlay degradê sutil na paleta dourada/bege */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-amber-900/30 via-amber-700/20 to-amber-500/10"></div>
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-600/10 via-amber-500/5 to-orange-400/10"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-amber-900/25 via-amber-700/15 to-amber-500/5"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-600/8 via-amber-500/3 to-orange-400/8"></div>
                   
                   {/* Texto sobreposto com melhor visibilidade */}
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -98,7 +107,7 @@ const CompanySection = () => {
                       <h3 className="font-sf-pro text-5xl md:text-6xl lg:text-7xl font-black text-luxury-gold mb-8 drop-shadow-2xl tracking-tight">
                         IDEAL
                       </h3>
-                      <p className="text-white text-xl md:text-2xl font-bold drop-shadow-2xl max-w-sm mx-auto leading-relaxed bg-black/20 backdrop-blur-sm px-6 py-3 rounded-2xl">
+                      <p className="text-white text-xl md:text-2xl font-bold drop-shadow-2xl max-w-sm mx-auto leading-relaxed bg-black/15 backdrop-blur-sm px-6 py-3 rounded-2xl">
                         O sonho da casa própria está mais próximo do que você imagina
                       </p>
                     </div>
