@@ -1,15 +1,10 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { useAdmin } from '@/contexts/AdminContext';
 import { useToast } from '@/hooks/use-toast';
 import { Save } from 'lucide-react';
 
 const FooterEditor = () => {
-  const { footerContent, setFooterContent } = useAdmin();
   const { toast } = useToast();
 
   const handleSave = () => {
@@ -19,71 +14,34 @@ const FooterEditor = () => {
     });
   };
 
-  const updateFooterField = (field: keyof typeof footerContent, value: string) => {
-    setFooterContent({
-      ...footerContent,
-      [field]: value
-    });
-  };
-
   return (
     <div className="space-y-6">
-      <div className="grid gap-4">
-        <div>
-          <Label htmlFor="company-name">Nome da Empresa</Label>
-          <Input
-            id="company-name"
-            value={footerContent.companyName}
-            onChange={(e) => updateFooterField('companyName', e.target.value)}
-            placeholder="Ex: SOLLARA GARDEN BARRA MANSA"
-            className="mt-1"
-          />
-        </div>
+      <div className="bg-gray-50 p-6 rounded-lg">
+        <h3 className="font-medium text-gray-900 mb-4">Configuração do Rodapé</h3>
+        <p className="text-gray-600 mb-4">
+          O rodapé foi otimizado para um design minimalista, exibindo apenas:
+        </p>
+        <ul className="list-disc list-inside text-gray-600 space-y-2">
+          <li>Logotipo da Sollara Garden</li>
+          <li>Copyright básico</li>
+          <li>Link para o painel administrativo</li>
+        </ul>
+      </div>
 
-        <div>
-          <Label htmlFor="tagline">Slogan/Tagline</Label>
-          <Input
-            id="tagline"
-            value={footerContent.tagline}
-            onChange={(e) => updateFooterField('tagline', e.target.value)}
-            placeholder="Ex: Grupo Salha Empreendimentos"
-            className="mt-1"
-          />
-        </div>
-
-        <div>
-          <Label htmlFor="description">Descrição</Label>
-          <Textarea
-            id="description"
-            value={footerContent.description}
-            onChange={(e) => updateFooterField('description', e.target.value)}
-            placeholder="Ex: Transformando sonhos em realidade há mais de 30 anos..."
-            className="mt-1"
-            rows={3}
-          />
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <Label htmlFor="creci">CRECI</Label>
-            <Input
-              id="creci"
-              value={footerContent.creci}
-              onChange={(e) => updateFooterField('creci', e.target.value)}
-              placeholder="Ex: 00000-J"
-              className="mt-1"
+      <div className="bg-gray-50 p-4 rounded-lg">
+        <h3 className="font-medium text-gray-900 mb-2">Prévia do Rodapé:</h3>
+        <div className="space-y-4 text-center">
+          <div className="flex justify-center">
+            <img 
+              src="/lovable-uploads/c67509dc-b8fd-4b63-a711-7737584ea409.png" 
+              alt="Sollara Garden Logo"
+              className="h-24 w-auto"
             />
           </div>
-
-          <div>
-            <Label htmlFor="cnpj">CNPJ</Label>
-            <Input
-              id="cnpj"
-              value={footerContent.cnpj}
-              onChange={(e) => updateFooterField('cnpj', e.target.value)}
-              placeholder="Ex: 00.000.000/0001-00"
-              className="mt-1"
-            />
+          <div className="border-t border-gray-200 pt-4">
+            <p className="text-sm text-gray-500">
+              © {new Date().getFullYear()} Sollara Garden. Todos os direitos reservados.
+            </p>
           </div>
         </div>
       </div>
@@ -91,21 +49,8 @@ const FooterEditor = () => {
       <div className="pt-4 border-t">
         <Button onClick={handleSave} className="flex items-center space-x-2">
           <Save className="w-4 h-4" />
-          <span>Salvar Alterações</span>
+          <span>Confirmar Configuração</span>
         </Button>
-      </div>
-
-      <div className="bg-gray-50 p-4 rounded-lg">
-        <h3 className="font-medium text-gray-900 mb-2">Prévia do Rodapé:</h3>
-        <div className="space-y-2 text-sm">
-          <p className="font-bold text-lg">{footerContent.companyName}</p>
-          <p className="text-amber-600">{footerContent.tagline}</p>
-          <p className="text-gray-600">{footerContent.description}</p>
-          <div className="flex space-x-4 text-xs text-gray-500">
-            <span>CRECI: {footerContent.creci}</span>
-            <span>CNPJ: {footerContent.cnpj}</span>
-          </div>
-        </div>
       </div>
     </div>
   );
