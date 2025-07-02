@@ -84,18 +84,41 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Title */}
-          <div className="space-y-4">
-            <h1 className="section-title text-white text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
-              Descubra o futuro da vida residencial em Barra Mansa
-            </h1>
+          {/* Title with golden effects */}
+          <div className="space-y-6">
+            <div className="relative">
+              {/* Golden glow background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-luxury-gold/20 to-transparent blur-2xl"></div>
+              
+              <h1 className="relative font-sf-pro text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-luxury-gold via-yellow-300 to-luxury-gold animate-pulse">
+                <span className="block mb-2 text-shadow-golden">CONFORTO</span>
+                <span className="block mb-2 text-shadow-golden">MODERNIDADE</span>
+                <span className="block mb-2 text-shadow-golden">SEGURANÇA</span>
+                <span className="block text-shadow-golden">E LAZER COMPLETO</span>
+                <span className="block mt-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl text-luxury-gold-light">
+                  AO SEU ALCANCE
+                </span>
+              </h1>
+              
+              {/* Decorative golden lines */}
+              <div className="flex justify-center mt-6">
+                <div className="flex items-center space-x-4">
+                  <div className="w-16 h-0.5 bg-gradient-to-r from-transparent to-luxury-gold"></div>
+                  <div className="w-2 h-2 bg-luxury-gold rounded-full animate-pulse"></div>
+                  <div className="w-32 h-0.5 bg-gradient-to-r from-luxury-gold via-yellow-300 to-luxury-gold"></div>
+                  <div className="w-2 h-2 bg-luxury-gold rounded-full animate-pulse"></div>
+                  <div className="w-16 h-0.5 bg-gradient-to-l from-transparent to-luxury-gold"></div>
+                </div>
+              </div>
+            </div>
             
-            {/* CTA Button */}
+            {/* CTA Button with golden theme */}
             <button
               onClick={scrollToVideoSection}
-              className="bg-luxury-gold hover:bg-luxury-gold-dark text-luxury-brown font-bold py-4 px-8 rounded-2xl text-lg md:text-xl transition-all duration-300 hover:shadow-lg transform hover:scale-105"
+              className="relative overflow-hidden bg-gradient-to-r from-luxury-gold via-yellow-300 to-luxury-gold hover:from-luxury-gold-dark hover:via-luxury-gold hover:to-luxury-gold-dark text-luxury-brown font-bold py-4 px-8 rounded-2xl text-lg md:text-xl transition-all duration-300 hover:shadow-2xl hover:shadow-luxury-gold/50 transform hover:scale-105 border-2 border-luxury-gold/50"
             >
-              APRESENTAÇÃO EXCLUSIVA
+              <span className="relative z-10">APRESENTAÇÃO EXCLUSIVA</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform translate-x-full group-hover:translate-x-[-200%] transition-transform duration-1000"></div>
             </button>
           </div>
         </div>
