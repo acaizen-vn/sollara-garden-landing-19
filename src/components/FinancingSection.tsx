@@ -7,7 +7,7 @@ const FinancingSection = () => {
       <div className="container mx-auto px-4 md:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold text-luxury-brown mb-4 tracking-tight">
+            <h2 className="text-5xl md:text-6xl font-bold text-luxury-brown mb-4 tracking-tight font-playfair">
               ENTRADA PARCELADA
             </h2>
             <div className="w-32 h-1 bg-luxury-gold mx-auto mb-8"></div>
@@ -37,27 +37,6 @@ const FinancingSection = () => {
                         </p>
                       </div>
                     </div>
-                    
-                    <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-2xl p-6 mb-6">
-                      <div className="grid md:grid-cols-2 gap-4 text-luxury-brown">
-                        <div className="flex items-center">
-                          <div className="w-3 h-3 bg-blue-600 rounded-full mr-3"></div>
-                          <span className="font-medium">Financiamento até 100% do valor</span>
-                        </div>
-                        <div className="flex items-center">
-                          <div className="w-3 h-3 bg-blue-600 rounded-full mr-3"></div>
-                          <span className="font-medium">Prazo de até 35 anos para pagar</span>
-                        </div>
-                        <div className="flex items-center">
-                          <div className="w-3 h-3 bg-blue-600 rounded-full mr-3"></div>
-                          <span className="font-medium">Taxas de juros competitivas</span>
-                        </div>
-                        <div className="flex items-center">
-                          <div className="w-3 h-3 bg-blue-600 rounded-full mr-3"></div>
-                          <span className="font-medium">Processo simplificado</span>
-                        </div>
-                      </div>
-                    </div>
                   </div>
 
                   {/* Separador */}
@@ -76,27 +55,6 @@ const FinancingSection = () => {
                         <p className="text-lg text-green-600 font-semibold">
                           Oportunidade de usar seu fundo de garantia
                         </p>
-                      </div>
-                    </div>
-                    
-                    <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-2xl p-6">
-                      <div className="grid md:grid-cols-2 gap-4 text-luxury-brown">
-                        <div className="flex items-center">
-                          <div className="w-3 h-3 bg-green-600 rounded-full mr-3"></div>
-                          <span className="font-medium">Use como entrada do imóvel</span>
-                        </div>
-                        <div className="flex items-center">
-                          <div className="w-3 h-3 bg-green-600 rounded-full mr-3"></div>
-                          <span className="font-medium">Amortize o saldo devedor</span>
-                        </div>
-                        <div className="flex items-center">
-                          <div className="w-3 h-3 bg-green-600 rounded-full mr-3"></div>
-                          <span className="font-medium">Reduza as parcelas mensais</span>
-                        </div>
-                        <div className="flex items-center">
-                          <div className="w-3 h-3 bg-green-600 rounded-full mr-3"></div>
-                          <span className="font-medium">Aproveite seu dinheiro guardado</span>
-                        </div>
                       </div>
                     </div>
                   </div>
