@@ -71,14 +71,14 @@ const ImageCarousel = () => {
                       onLoad={() => handleImageLoad(index)}
                     />
                     
-                    {/* Image overlay with title */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                    <div className="absolute bottom-8 left-8 right-8 text-white">
-                      <h3 className="text-2xl md:text-3xl font-bold mb-2 drop-shadow-lg">
+                    {/* Image overlay with title - melhorado para mobile */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8 right-4 md:right-8 text-white">
+                      <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2 drop-shadow-lg">
                         {image.title}
                       </h3>
                       {image.description && (
-                        <p className="text-lg opacity-90 drop-shadow-md">
+                        <p className="text-sm sm:text-base md:text-lg opacity-90 drop-shadow-md">
                           {image.description}
                         </p>
                       )}
@@ -87,21 +87,21 @@ const ImageCarousel = () => {
                 ))}
               </div>
 
-              {/* Navigation arrows */}
+              {/* Navigation arrows - melhorados para mobile */}
               <button
                 onClick={prevSlide}
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md rounded-full p-3 text-white hover:bg-white/30 transition-all duration-200 shadow-lg"
+                className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-white/30 backdrop-blur-md rounded-full p-2 md:p-3 text-white hover:bg-white/40 transition-all duration-200 shadow-lg"
                 aria-label="Imagem anterior"
               >
-                <ChevronLeft className="w-6 h-6" />
+                <ChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
               </button>
               
               <button
                 onClick={nextSlide}
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md rounded-full p-3 text-white hover:bg-white/30 transition-all duration-200 shadow-lg"
+                className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-white/30 backdrop-blur-md rounded-full p-2 md:p-3 text-white hover:bg-white/40 transition-all duration-200 shadow-lg"
                 aria-label="Próxima imagem"
               >
-                <ChevronRight className="w-6 h-6" />
+                <ChevronRight className="w-4 h-4 md:w-6 md:h-6" />
               </button>
             </div>
 

@@ -18,10 +18,10 @@ const AboutSection = () => {
             <div className="bg-white rounded-2xl p-8 md:p-12 shadow-lg">
               <div className="space-y-8 text-lg text-luxury-brown leading-relaxed">
                 
-                {/* Casas de 2 e 3 Quartos */}
+                {/* Casas de 1, 2 e 3 Quartos */}
                 <div>
                   <h3 className="font-sf-pro text-2xl font-bold text-luxury-brown mb-4">
-                    Casas de 2 e 3 Quartos
+                    Casas de 1, 2 e 3 Quartos
                   </h3>
                 </div>
 
