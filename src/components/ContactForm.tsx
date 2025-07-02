@@ -114,7 +114,7 @@ const ContactForm = () => {
 
                 <div className="space-y-2">
                   <Label htmlFor="phone" className="text-luxury-brown text-lg font-semibold mb-3 block">
-                    WhatsApp *
+                    Whatsapp - Telefone *
                   </Label>
                   <Input
                     id="phone"

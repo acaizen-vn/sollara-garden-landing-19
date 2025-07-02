@@ -19,25 +19,25 @@ const CompanySection = () => {
           <div className="animate-fade-in">
             <div className="bg-white rounded-2xl p-8 md:p-10 shadow-lg">
               <div className="space-y-6 text-lg text-luxury-brown leading-relaxed">
-                <p>
+                <p className="italic">
                   Com mais de <strong>duas décadas de experiência</strong> no mercado imobiliário, o Grupo Salha 
                   se consolidou como referência em projetos residenciais na região do Vale do Paraíba. 
                   Nossa trajetória é marcada pela dedicação em transformar sonhos em realidade.
                 </p>
                 
-                <p>
+                <p className="italic">
                   Nossa missão é oferecer empreendimentos com <strong>segurança, qualidade construtiva e 
                   localização privilegiada</strong>, sempre superando as expectativas de nossos clientes. 
                   Cada projeto é desenvolvido com atenção aos detalhes e compromisso com a excelência.
                 </p>
 
-                <p>
+                <p className="italic">
                   Ao longo dos anos, já entregamos <strong>mais de 50 projetos</strong> e proporcionamos 
                   o sonho da casa própria para <strong>mais de 1000 famílias</strong>. Essa experiência 
                   nos permite compreender as necessidades reais de nossos clientes.
                 </p>
 
-                <p>
+                <p className="italic">
                   O <strong>Sollara Garden</strong> representa o que há de mais moderno em nossa linha de 
                   empreendimentos, combinando localização estratégica, arquitetura contemporânea e 
                   infraestrutura completa de lazer para proporcionar qualidade de vida excepcional.

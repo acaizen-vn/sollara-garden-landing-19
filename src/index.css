@@ -120,8 +120,16 @@
     @apply bg-luxury-red hover:bg-luxury-red-dark text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 hover:shadow-lg;
   }
 
+  .section-title {
+    @apply font-sf-pro text-3xl md:text-4xl font-bold text-luxury-brown mb-6 tracking-tight;
+  }
+
   .section-title-modern {
     @apply font-sf-pro text-3xl md:text-4xl font-semibold text-gray-900 mb-6 tracking-tight;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-luxury-brown-light mb-8 font-inter font-normal leading-relaxed;
   }
 
   .section-subtitle-modern {
