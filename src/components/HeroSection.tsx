@@ -89,17 +89,6 @@ const HeroSection = () => {
               <h1 className="font-sf-pro text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600">
                 CONFORTO, MODERNIDADE, SEGURANÇA E LAZER COMPLETO AO SEU ALCANCE
               </h1>
-              
-              {/* Decorative golden lines */}
-              <div className="flex justify-center mt-6">
-                <div className="flex items-center space-x-4">
-                  <div className="w-16 h-0.5 bg-gradient-to-r from-transparent to-yellow-500"></div>
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                  <div className="w-32 h-0.5 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600"></div>
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                  <div className="w-16 h-0.5 bg-gradient-to-l from-transparent to-yellow-500"></div>
-                </div>
-              </div>
             </div>
             
             {/* CTA Button with golden theme */}
