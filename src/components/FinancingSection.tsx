@@ -19,37 +19,35 @@ const FinancingSection = () => {
           <div className="animate-fade-in">
             <div className="max-w-4xl mx-auto">
               {/* Informações de Financiamento */}
-              <div className="bg-gradient-to-br from-luxury-gold via-yellow-500 to-yellow-600 rounded-3xl p-1 shadow-2xl">
-                <div className="bg-white rounded-3xl p-8 md:p-12">
-                  
-                  {/* Financiamento Caixa */}
-                  <div className="mb-8">
-                    <div className="text-center mb-6">
-                      <h3 className="text-2xl md:text-3xl font-bold text-luxury-brown mb-2">
-                        Financiamento Caixa Econômica Federal
-                      </h3>
-                      <p className="text-lg text-blue-600 font-semibold">
-                        Condições especiais e taxas diferenciadas
-                      </p>
-                    </div>
+              <div className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl">
+                
+                {/* Financiamento Caixa */}
+                <div className="mb-8">
+                  <div className="text-center mb-6">
+                    <h3 className="text-2xl md:text-3xl font-bold text-luxury-brown mb-2">
+                      Financiamento Caixa Econômica Federal
+                    </h3>
+                    <p className="text-lg text-blue-600 font-semibold">
+                      Condições especiais e taxas diferenciadas
+                    </p>
                   </div>
-
-                  {/* Separador */}
-                  <div className="border-t border-luxury-gold/20 my-8"></div>
-
-                  {/* FGTS */}
-                  <div>
-                    <div className="text-center mb-6">
-                      <h3 className="text-2xl md:text-3xl font-bold text-luxury-brown mb-2">
-                        Utilize seu FGTS
-                      </h3>
-                      <p className="text-lg text-green-600 font-semibold">
-                        Oportunidade de usar seu fundo de garantia
-                      </p>
-                    </div>
-                  </div>
-
                 </div>
+
+                {/* Separador */}
+                <div className="border-t border-luxury-gold/20 my-8"></div>
+
+                {/* FGTS */}
+                <div>
+                  <div className="text-center mb-6">
+                    <h3 className="text-2xl md:text-3xl font-bold text-luxury-brown mb-2">
+                      Utilize seu FGTS
+                    </h3>
+                    <p className="text-lg text-green-600 font-semibold">
+                      Oportunidade de usar seu fundo de garantia
+                    </p>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
