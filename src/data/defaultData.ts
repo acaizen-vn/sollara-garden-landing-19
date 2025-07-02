@@ -50,6 +50,20 @@ export const defaultCarouselImages: CarouselImage[] = [
     alt: 'Área de lazer com piscina e deck para relaxamento',
     title: 'Área de Lazer',
     description: 'Piscina e deck para momentos de relaxamento'
+  },
+  {
+    id: '8',
+    url: '/lovable-uploads/ee423a97-a6c8-4262-af92-67edff548b36.png',
+    alt: 'Vista aérea completa do clube com piscina, quadras e área infantil',
+    title: 'Clube Completo',
+    description: 'Área de lazer com piscina, quadras e playground'
+  },
+  {
+    id: '9',
+    url: '/lovable-uploads/d7ea24ba-43d2-46d1-a506-90bdc80a4b6c.png',
+    alt: 'Playground infantil com brinquedos modernos e seguros',
+    title: 'Playground Infantil',
+    description: 'Espaço seguro e divertido para as crianças'
   }
 ];
 
