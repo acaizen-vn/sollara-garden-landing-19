@@ -21,9 +21,6 @@ const Footer = () => {
               <p className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-lg font-semibold mb-2">
                 Grupo Salha Empreendimentos
               </p>
-              <p className="text-white/80 text-base">
-                Sollara Garden
-              </p>
             </div>
             
             <div className="border-t border-white/20 pt-8">
