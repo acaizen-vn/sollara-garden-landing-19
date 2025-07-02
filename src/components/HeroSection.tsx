@@ -84,7 +84,7 @@ const HeroSection = () => {
           </div>
 
           {/* Title with golden gradient - aligned as phrase */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             <div className="relative">
               <h1 className="font-sf-pro text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600">
                 CONFORTO, MODERNIDADE, SEGURANÇA E LAZER COMPLETO AO SEU ALCANCE
