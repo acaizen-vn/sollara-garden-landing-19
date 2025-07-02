@@ -84,18 +84,15 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Title with golden effects */}
+          {/* Title with golden gradient */}
           <div className="space-y-6">
             <div className="relative">
-              {/* Golden glow background */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-luxury-gold/20 to-transparent blur-2xl"></div>
-              
-              <h1 className="relative font-sf-pro text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-luxury-gold via-yellow-300 to-luxury-gold animate-pulse">
-                <span className="block mb-2 text-shadow-golden">CONFORTO</span>
-                <span className="block mb-2 text-shadow-golden">MODERNIDADE</span>
-                <span className="block mb-2 text-shadow-golden">SEGURANÇA</span>
-                <span className="block text-shadow-golden">E LAZER COMPLETO</span>
-                <span className="block mt-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl text-luxury-gold-light">
+              <h1 className="font-sf-pro text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600">
+                <span className="block mb-2">CONFORTO</span>
+                <span className="block mb-2">MODERNIDADE</span>
+                <span className="block mb-2">SEGURANÇA</span>
+                <span className="block">E LAZER COMPLETO</span>
+                <span className="block mt-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl bg-gradient-to-r from-yellow-500 to-yellow-600 bg-clip-text text-transparent">
                   AO SEU ALCANCE
                 </span>
               </h1>
@@ -103,11 +100,11 @@ const HeroSection = () => {
               {/* Decorative golden lines */}
               <div className="flex justify-center mt-6">
                 <div className="flex items-center space-x-4">
-                  <div className="w-16 h-0.5 bg-gradient-to-r from-transparent to-luxury-gold"></div>
-                  <div className="w-2 h-2 bg-luxury-gold rounded-full animate-pulse"></div>
-                  <div className="w-32 h-0.5 bg-gradient-to-r from-luxury-gold via-yellow-300 to-luxury-gold"></div>
-                  <div className="w-2 h-2 bg-luxury-gold rounded-full animate-pulse"></div>
-                  <div className="w-16 h-0.5 bg-gradient-to-l from-transparent to-luxury-gold"></div>
+                  <div className="w-16 h-0.5 bg-gradient-to-r from-transparent to-yellow-500"></div>
+                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                  <div className="w-32 h-0.5 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600"></div>
+                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                  <div className="w-16 h-0.5 bg-gradient-to-l from-transparent to-yellow-500"></div>
                 </div>
               </div>
             </div>
@@ -115,10 +112,9 @@ const HeroSection = () => {
             {/* CTA Button with golden theme */}
             <button
               onClick={scrollToVideoSection}
-              className="relative overflow-hidden bg-gradient-to-r from-luxury-gold via-yellow-300 to-luxury-gold hover:from-luxury-gold-dark hover:via-luxury-gold hover:to-luxury-gold-dark text-luxury-brown font-bold py-4 px-8 rounded-2xl text-lg md:text-xl transition-all duration-300 hover:shadow-2xl hover:shadow-luxury-gold/50 transform hover:scale-105 border-2 border-luxury-gold/50"
+              className="relative overflow-hidden bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold py-4 px-8 rounded-2xl text-lg md:text-xl transition-all duration-300 hover:shadow-lg transform hover:scale-105 border-2 border-yellow-500/50"
             >
               <span className="relative z-10">APRESENTAÇÃO EXCLUSIVA</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform translate-x-full group-hover:translate-x-[-200%] transition-transform duration-1000"></div>
             </button>
           </div>
         </div>
