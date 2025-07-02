@@ -24,18 +24,13 @@ const FinancingSection = () => {
                   
                   {/* Financiamento Caixa */}
                   <div className="mb-8">
-                    <div className="flex items-center justify-center mb-6">
-                      <div className="w-20 h-20 bg-blue-600 rounded-2xl flex items-center justify-center mr-6">
-                        <span className="text-white font-bold text-sm">CAIXA</span>
-                      </div>
-                      <div className="text-left">
-                        <h3 className="text-2xl md:text-3xl font-bold text-luxury-brown mb-2">
-                          Financiamento Caixa Econômica Federal
-                        </h3>
-                        <p className="text-lg text-blue-600 font-semibold">
-                          Condições especiais e taxas diferenciadas
-                        </p>
-                      </div>
+                    <div className="text-center mb-6">
+                      <h3 className="text-2xl md:text-3xl font-bold text-luxury-brown mb-2">
+                        Financiamento Caixa Econômica Federal
+                      </h3>
+                      <p className="text-lg text-blue-600 font-semibold">
+                        Condições especiais e taxas diferenciadas
+                      </p>
                     </div>
                   </div>
 
@@ -44,18 +39,13 @@ const FinancingSection = () => {
 
                   {/* FGTS */}
                   <div>
-                    <div className="flex items-center justify-center mb-6">
-                      <div className="w-20 h-20 bg-green-600 rounded-2xl flex items-center justify-center mr-6">
-                        <span className="text-white font-bold text-sm">FGTS</span>
-                      </div>
-                      <div className="text-left">
-                        <h3 className="text-2xl md:text-3xl font-bold text-luxury-brown mb-2">
-                          Utilize seu FGTS
-                        </h3>
-                        <p className="text-lg text-green-600 font-semibold">
-                          Oportunidade de usar seu fundo de garantia
-                        </p>
-                      </div>
+                    <div className="text-center mb-6">
+                      <h3 className="text-2xl md:text-3xl font-bold text-luxury-brown mb-2">
+                        Utilize seu FGTS
+                      </h3>
+                      <p className="text-lg text-green-600 font-semibold">
+                        Oportunidade de usar seu fundo de garantia
+                      </p>
                     </div>
                   </div>
 
