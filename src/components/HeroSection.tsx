@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import FloatingParticles from './effects/FloatingParticles';
 
@@ -84,17 +83,11 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Title with golden gradient */}
+          {/* Title with golden gradient - aligned as phrase */}
           <div className="space-y-6">
             <div className="relative">
-              <h1 className="font-sf-pro text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600">
-                <span className="block mb-2">CONFORTO</span>
-                <span className="block mb-2">MODERNIDADE</span>
-                <span className="block mb-2">SEGURANÇA</span>
-                <span className="block">E LAZER COMPLETO</span>
-                <span className="block mt-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl bg-gradient-to-r from-yellow-500 to-yellow-600 bg-clip-text text-transparent">
-                  AO SEU ALCANCE
-                </span>
+              <h1 className="font-sf-pro text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600">
+                CONFORTO, MODERNIDADE, SEGURANÇA E LAZER COMPLETO AO SEU ALCANCE
               </h1>
               
               {/* Decorative golden lines */}
