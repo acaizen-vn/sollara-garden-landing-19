@@ -76,33 +76,6 @@ const FinancingSection = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Informações adicionais */}
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="text-center p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg">
-                  <div className="w-12 h-12 bg-luxury-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">💰</span>
-                  </div>
-                  <h4 className="font-bold text-luxury-brown mb-2">Entrada Facilitada</h4>
-                  <p className="text-sm text-luxury-brown-light">Parcele sua entrada em condições especiais</p>
-                </div>
-
-                <div className="text-center p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg">
-                  <div className="w-12 h-12 bg-luxury-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">📋</span>
-                  </div>
-                  <h4 className="font-bold text-luxury-brown mb-2">Documentação Simples</h4>
-                  <p className="text-sm text-luxury-brown-light">Processo ágil e descomplicado</p>
-                </div>
-
-                <div className="text-center p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg">
-                  <div className="w-12 h-12 bg-luxury-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">🏠</span>
-                  </div>
-                  <h4 className="font-bold text-luxury-brown mb-2">Chaves na Mão</h4>
-                  <p className="text-sm text-luxury-brown-light">Pronto para morar com toda infraestrutura</p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
