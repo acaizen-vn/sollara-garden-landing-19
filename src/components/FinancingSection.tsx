@@ -73,18 +73,6 @@ const FinancingSection = () => {
                         </div>
                       </div>
                     </div>
-
-                    {/* Call to action */}
-                    <div className="mt-8 pt-6 border-t border-luxury-gold/20">
-                      <p className="text-lg text-luxury-brown mb-4">
-                        <strong>Entrada parcelada em até 12x</strong> sem juros
-                      </p>
-                      <div className="flex justify-center">
-                        <button className="bg-gradient-to-r from-luxury-gold via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-white font-bold py-4 px-8 rounded-2xl text-lg transition-all duration-300 hover:shadow-lg transform hover:scale-105 border-2 border-yellow-500/50">
-                          Simule seu financiamento
-                        </button>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
