@@ -18,11 +18,11 @@ const Footer = () => {
             
             {/* Project Attribution */}
             <div className="mb-6">
-              <p className="text-white text-lg font-semibold mb-2">
+              <p className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-lg font-semibold mb-2">
                 Grupo Salha Empreendimentos
               </p>
               <p className="text-white/80 text-base">
-                Proprietário do projeto Sollara Garden
+                Sollara Garden
               </p>
             </div>
             
