@@ -1,206 +1,126 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Image as ImageIcon } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+
+import React, { useState, useCallback } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useAdmin } from '@/contexts/AdminContext';
 
 const ImageCarousel = () => {
   const { carouselImages } = useAdmin();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
-  const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
 
-  // Usar apenas as imagens do contexto (que agora tem apenas as 10 primeiras)
-  const allImages = carouselImages;
-
-  // Preload imagens adjacentes para melhor UX
-  useEffect(() => {
-    if (allImages.length === 0) return;
-
-    const preloadImage = (url: string) => {
-      if (loadedImages.has(url) || imageErrors.has(url)) return;
-      
-      const img = new Image();
-      img.onload = () => {
-        setLoadedImages(prev => new Set([...prev, url]));
-      };
-      img.onerror = () => {
-        setImageErrors(prev => new Set([...prev, url]));
-      };
-      img.src = url;
-    };
-
-    // Preload imagem atual e adjacentes
-    const currentImage = allImages[currentIndex];
-    const nextImage = allImages[(currentIndex + 1) % allImages.length];
-    const prevImage = allImages[currentIndex === 0 ? allImages.length - 1 : currentIndex - 1];
-
-    if (currentImage) preloadImage(currentImage.url);
-    if (nextImage && nextImage !== currentImage) preloadImage(nextImage.url);
-    if (prevImage && prevImage !== currentImage && prevImage !== nextImage) preloadImage(prevImage.url);
-  }, [currentIndex, allImages, loadedImages, imageErrors]);
-
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % allImages.length);
-  };
-
-  const prevSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? allImages.length - 1 : prevIndex - 1
+      prevIndex === carouselImages.length - 1 ? 0 : prevIndex + 1
     );
-  };
+  }, [carouselImages.length]);
 
-  const goToSlide = (index: number) => {
+  const prevSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? carouselImages.length - 1 : prevIndex - 1
+    );
+  }, [carouselImages.length]);
+
+  const goToSlide = useCallback((index: number) => {
     setCurrentIndex(index);
-  };
+  }, []);
 
-  const handleImageError = (url: string) => {
-    setImageErrors(prev => new Set([...prev, url]));
-  };
+  const handleImageLoad = useCallback((index: number) => {
+    setLoadedImages(prev => new Set([...prev, index]));
+  }, []);
 
-  const ImageWithFallback = ({ 
-    src, 
-    alt, 
-    className, 
-    onClick 
-  }: { 
-    src: string; 
-    alt: string; 
-    className?: string; 
-    onClick?: () => void;
-  }) => {
-    const [isLoading, setIsLoading] = useState(!loadedImages.has(src));
-    const hasError = imageErrors.has(src);
-
-    if (hasError) {
-      return (
-        <div className={`${className} bg-gray-200 flex items-center justify-center`} onClick={onClick}>
-          <div className="text-center text-gray-500">
-            <ImageIcon className="w-8 h-8 mx-auto mb-2" />
-            <p className="text-sm">Imagem não disponível</p>
-          </div>
-        </div>
-      );
-    }
-
-    return (
-      <div className="relative">
-        {isLoading && (
-          <div className={`${className} bg-gray-200 animate-pulse flex items-center justify-center absolute inset-0`}>
-            <div className="w-8 h-8 border-4 border-gray-300 border-t-gray-600 rounded-full animate-spin"></div>
-          </div>
-        )}
-        <img
-          src={src}
-          alt={alt}
-          className={className}
-          onClick={onClick}
-          loading="lazy"
-          onLoad={() => {
-            setIsLoading(false);
-            setLoadedImages(prev => new Set([...prev, src]));
-          }}
-          onError={() => handleImageError(src)}
-          style={{ display: isLoading ? 'none' : 'block' }}
-        />
-      </div>
-    );
-  };
+  if (!carouselImages || carouselImages.length === 0) return null;
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+    <section className="py-16 bg-luxury-cream">
       <div className="container mx-auto px-4 md:px-8">
-        <div className="text-center mb-16 fade-in">
-          <h2 className="section-title-modern text-4xl md:text-5xl font-bold bg-gradient-to-r from-luxury-red to-luxury-gold bg-clip-text text-transparent">
-            GALERIA SOLLARA GARDEN
-          </h2>
-          <div className="w-32 h-1 bg-gradient-to-r from-luxury-red to-luxury-gold mx-auto mb-8"></div>
-          <p className="section-subtitle-modern text-xl">
-            Conheça cada detalhe do seu futuro lar de luxo
-          </p>
-        </div>
-
-        <div className="relative max-w-7xl mx-auto">
-          {/* Imagem Principal com design inovador */}
-          <div className="relative overflow-hidden rounded-3xl shadow-2xl border-4 border-luxury-gold/20">
-            <div className="aspect-[16/9] relative group">
-              <ImageWithFallback
-                src={allImages[currentIndex]?.url}
-                alt={allImages[currentIndex]?.alt}
-                className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
-              />
-              
-              {/* Overlay inovador com gradiente */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
-              {/* Info overlay */}
-              <div className="absolute bottom-6 left-6 right-6 bg-black/60 backdrop-blur-sm rounded-2xl p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <p className="text-white font-medium text-lg">{allImages[currentIndex]?.alt}</p>
-              </div>
-              
-              {/* Botões de navegação inovadores */}
-              {allImages.length > 1 && (
-                <>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={prevSlide}
-                    className="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-luxury-gold/90 backdrop-blur-sm border border-luxury-gold/30 hover:bg-luxury-gold text-white rounded-full shadow-2xl hover:scale-110 transition-all duration-200"
-                  >
-                    <ChevronLeft className="w-6 h-6" />
-                  </Button>
-                  
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={nextSlide}
-                    className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-luxury-gold/90 backdrop-blur-sm border border-luxury-gold/30 hover:bg-luxury-gold text-white rounded-full shadow-2xl hover:scale-110 transition-all duration-200"
-                  >
-                    <ChevronRight className="w-6 h-6" />
-                  </Button>
-                </>
-              )}
-            </div>
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12 animate-fade-in">
+            <h2 className="section-title text-luxury-brown">
+              GALERIA SOLLARA GARDEN
+            </h2>
+            <div className="w-32 h-1 bg-luxury-gold mx-auto mb-8"></div>
+            <p className="section-subtitle text-luxury-brown-light">
+              Conheça os ambientes e diferenciais do empreendimento
+            </p>
           </div>
 
-          {/* Thumbnails inovadores */}
-          {allImages.length > 1 && (
-            <div className="flex justify-center mt-8 space-x-4 overflow-x-auto pb-4">
-              {allImages.map((image, index) => (
-                <button
-                  key={image.id}
-                  onClick={() => goToSlide(index)}
-                  className={`flex-shrink-0 w-24 h-20 md:w-28 md:h-24 rounded-2xl overflow-hidden border-3 transition-all duration-300 hover:scale-105 ${
-                    index === currentIndex
-                      ? 'border-luxury-gold shadow-xl shadow-luxury-gold/30 scale-105'
-                      : 'border-gray-200 hover:border-luxury-gold/50'
-                  }`}
-                >
-                  <ImageWithFallback
-                    src={image.url}
-                    alt={image.alt}
-                    className="w-full h-full object-cover"
-                  />
-                </button>
-              ))}
-            </div>
-          )}
+          <div className="relative">
+            {/* Main carousel container */}
+            <div className="relative overflow-hidden rounded-3xl shadow-2xl bg-luxury-beige">
+              <div className="aspect-video relative">
+                {carouselImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-opacity duration-500 ${
+                      index === currentIndex ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  >
+                    {/* Lazy loading skeleton */}
+                    {!loadedImages.has(index) && (
+                      <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
+                        <div className="w-16 h-16 border-4 border-luxury-gold border-t-transparent rounded-full animate-spin"></div>
+                      </div>
+                    )}
+                    <img
+                      src={image.url}
+                      alt={image.title}
+                      className={`w-full h-full object-cover transition-opacity duration-300 ${
+                        loadedImages.has(index) ? 'opacity-100' : 'opacity-0'
+                      }`}
+                      loading={index <= 2 ? 'eager' : 'lazy'}
+                      onLoad={() => handleImageLoad(index)}
+                    />
+                    
+                    {/* Image overlay with title */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                    <div className="absolute bottom-8 left-8 right-8 text-white">
+                      <h3 className="text-2xl md:text-3xl font-bold mb-2 drop-shadow-lg">
+                        {image.title}
+                      </h3>
+                      {image.description && (
+                        <p className="text-lg opacity-90 drop-shadow-md">
+                          {image.description}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
 
-          {/* Indicadores inovadores */}
-          {allImages.length > 1 && (
-            <div className="flex justify-center mt-8 space-x-3">
-              {allImages.map((_, index) => (
+              {/* Navigation arrows */}
+              <button
+                onClick={prevSlide}
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md rounded-full p-3 text-white hover:bg-white/30 transition-all duration-200 shadow-lg"
+                aria-label="Imagem anterior"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              
+              <button
+                onClick={nextSlide}
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md rounded-full p-3 text-white hover:bg-white/30 transition-all duration-200 shadow-lg"
+                aria-label="Próxima imagem"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Dots indicator */}
+            <div className="flex justify-center space-x-3 mt-8">
+              {carouselImages.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => goToSlide(index)}
-                  className={`h-3 rounded-full transition-all duration-300 ${
+                  className={`w-3 h-3 rounded-full transition-all duration-200 ${
                     index === currentIndex
-                      ? 'w-12 bg-luxury-gold shadow-lg shadow-luxury-gold/50'
-                      : 'w-3 bg-gray-300 hover:bg-luxury-gold/60'
+                      ? 'bg-luxury-gold scale-125'
+                      : 'bg-luxury-gold/40 hover:bg-luxury-gold/60'
                   }`}
+                  aria-label={`Ir para imagem ${index + 1}`}
                 />
               ))}
             </div>
-          )}
+          </div>
         </div>
       </div>
     </section>

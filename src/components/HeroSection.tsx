@@ -1,9 +1,6 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import FloatingParticles from './effects/FloatingParticles';
-import LiquidButton from './effects/LiquidButton';
-import HeroBackground from './hero/HeroBackground';
-import HeroLogo from './hero/HeroLogo';
 import HeroScrollHint from './hero/HeroScrollHint';
 
 const HeroSection = () => {
@@ -52,7 +49,7 @@ const HeroSection = () => {
       ref={heroRef}
       className="hero-section relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
     >
-      {/* Innovative Video Background */}
+      {/* Video Background */}
       <div className="absolute inset-0 z-0">
         <video
           ref={videoRef}
@@ -67,7 +64,7 @@ const HeroSection = () => {
           <source src="https://drive.google.com/uc?export=download&id=14jFcXML2KS1bawZ2P9V2_j7uoHNHrayp" type="video/mp4" />
         </video>
         
-        {/* Innovative overlay with animated gradients */}
+        {/* Overlay with animated gradients */}
         <div className="absolute inset-0 bg-gradient-to-br from-luxury-red/30 via-black/50 to-luxury-gold/20" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
         
@@ -77,13 +74,12 @@ const HeroSection = () => {
         <div className="absolute top-1/2 right-1/6 w-16 h-16 bg-luxury-gold/20 blur-xl animate-bounce" />
       </div>
 
-      {/* Subtle floating particles */}
       <FloatingParticles />
       
-      {/* Innovative content layout */}
+      {/* Simplified content layout */}
       <div className="relative z-20 text-center px-4 md:px-8 max-w-6xl mx-auto">
         <div className="innovative-hero-content space-y-12">
-          {/* Logo with enhanced effects - INCREASED SIZE */}
+          {/* Logo with enhanced effects */}
           <div className="logo-container">
             <div className="mb-8 group">
               <div className="relative inline-block">
@@ -107,33 +103,6 @@ const HeroSection = () => {
                 </div>
               </div>
             </div>
-          </div>
-          
-          {/* Innovative info cards with updated numbers */}
-          <div className="info-cards grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
-            <div className="info-card backdrop-blur-md bg-white/10 rounded-2xl p-6 border border-white/20">
-              <div className="text-3xl font-bold text-luxury-gold mb-2">320</div>
-              <div className="text-white/90 font-medium">Casas Disponíveis</div>
-            </div>
-            <div className="info-card backdrop-blur-md bg-white/10 rounded-2xl p-6 border border-white/20">
-              <div className="text-3xl font-bold text-luxury-gold mb-2">+1000m²</div>
-              <div className="text-white/90 font-medium">Área de Lazer</div>
-            </div>
-            <div className="info-card backdrop-blur-md bg-white/10 rounded-2xl p-6 border border-white/20">
-              <div className="text-3xl font-bold text-luxury-gold mb-2">100%</div>
-              <div className="text-white/90 font-medium">Segurança</div>
-            </div>
-          </div>
-
-          {/* Modern CTA Button - Moved below cards */}
-          <div className="cta-section mt-12">
-            <LiquidButton 
-              onClick={scrollToVideoSection}
-              className="btn-modern-red text-xl font-semibold px-12 py-5 transform hover:scale-105 transition-all duration-300"
-              size="lg"
-            >
-              CONHEÇA O SOLLARA GARDEN
-            </LiquidButton>
           </div>
         </div>
       </div>
