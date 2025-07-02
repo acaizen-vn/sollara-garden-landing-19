@@ -3,7 +3,6 @@ import React from 'react';
 import HeroSection from '@/components/HeroSection';
 import VideoSection from '@/components/VideoSection';
 import AboutSection from '@/components/AboutSection';
-import SportsSection from '@/components/SportsSection';
 import ImageCarousel from '@/components/ImageCarousel';
 import ContactForm from '@/components/ContactForm';
 import CompanySection from '@/components/CompanySection';
@@ -17,7 +16,6 @@ const Index = () => {
       <HeroSection />
       <VideoSection />
       <AboutSection />
-      <SportsSection />
       <ImageCarousel />
       <ContactForm />
       <CompanySection />
