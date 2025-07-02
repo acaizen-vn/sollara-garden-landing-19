@@ -73,13 +73,13 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-20 text-center px-4 md:px-8 max-w-6xl mx-auto">
         <div className="space-y-8 md:space-y-12">
-          {/* Logo - Significantly increased size */}
+          {/* Logo - Significantly increased size for mobile */}
           <div className="mb-6 md:mb-8">
             <div className="relative inline-block">
               <img 
                 src="/lovable-uploads/c67509dc-b8fd-4b63-a711-7737584ea409.png" 
                 alt="Sollara Garden Logo"
-                className="mx-auto h-72 md:h-96 lg:h-[28rem] w-auto drop-shadow-2xl"
+                className="mx-auto h-96 sm:h-[28rem] md:h-[32rem] lg:h-[36rem] w-auto drop-shadow-2xl"
               />
             </div>
           </div>
