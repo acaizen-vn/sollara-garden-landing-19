@@ -71,21 +71,7 @@ const VideoSection = () => {
     <section id="video-section" ref={sectionRef} className="py-16 bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
-          {/* Simplified section header */}
-          <div className="text-center mb-12 fade-in">
-            <div className="inline-flex items-center space-x-4 mb-6">
-              <div className="h-px bg-gradient-to-r from-transparent via-luxury-gold to-transparent flex-1" />
-              <div className="px-6 py-2 bg-luxury-gold/10 backdrop-blur-sm rounded-full border border-luxury-gold/20">
-                <span className="text-luxury-gold font-medium text-sm tracking-wider uppercase">Apresentação Exclusiva</span>
-              </div>
-              <div className="h-px bg-gradient-to-r from-transparent via-luxury-gold to-transparent flex-1" />
-            </div>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-              Descubra o futuro da vida residencial em Barra Mansa
-            </p>
-          </div>
-
-          {/* Simplified video container */}
+          {/* Video container sem cabeçalho duplicado */}
           <div className="relative">
             <div className="relative bg-gradient-to-br from-gray-900 to-black rounded-2xl overflow-hidden shadow-xl">
               <div className="aspect-video relative">
