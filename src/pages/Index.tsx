@@ -4,6 +4,7 @@ import HeroSection from '@/components/HeroSection';
 import VideoSection from '@/components/VideoSection';
 import AboutSection from '@/components/AboutSection';
 import ImageCarousel from '@/components/ImageCarousel';
+import FinancingSection from '@/components/FinancingSection';
 import ContactForm from '@/components/ContactForm';
 import CompanySection from '@/components/CompanySection';
 import Footer from '@/components/Footer';
@@ -17,6 +18,7 @@ const Index = () => {
       <VideoSection />
       <AboutSection />
       <ImageCarousel />
+      <FinancingSection />
       <ContactForm />
       <CompanySection />
       <Footer />
