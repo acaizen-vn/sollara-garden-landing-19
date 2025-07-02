@@ -39,7 +39,7 @@ const CompanySection = () => {
 
                 <p className="italic">
                   O <strong>Sollara Garden</strong> representa o que há de mais moderno em nossa linha de 
-                  empreendimentos, combinando localização estratégica, arquitetura contemporânea e 
+                  empreendimentos, combinando localização estratégica, arquitetura moderna e 
                   infraestrutura completa de lazer para proporcionar qualidade de vida excepcional.
                 </p>
               </div>
