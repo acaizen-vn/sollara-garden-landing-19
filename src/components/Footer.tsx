@@ -10,10 +10,20 @@ const Footer = () => {
             {/* Logo */}
             <div className="mb-8">
               <img 
-                src="/lovable-uploads/c67509dc-b8fd-4b63-a711-7737584ea409.png" 
-                alt="Sollara Garden Logo"
+                src="/lovable-uploads/51ca6b6b-95b1-4314-bad6-7305c41b418e.png" 
+                alt="Grupo Salha Logo"
                 className="mx-auto h-32 md:h-40 w-auto"
               />
+            </div>
+            
+            {/* Project Attribution */}
+            <div className="mb-6">
+              <p className="text-white text-lg font-semibold mb-2">
+                Grupo Salha Empreendimentos
+              </p>
+              <p className="text-white/80 text-base">
+                Proprietário do projeto Sollara Garden
+              </p>
             </div>
             
             <div className="border-t border-white/20 pt-8">
