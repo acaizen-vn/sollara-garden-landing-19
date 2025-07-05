@@ -1,5 +1,5 @@
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -21,11 +21,13 @@ const HeroEditor = () => {
     setHeroDescription,
     setHeroVideoUrl,
     setHeroVideoType,
-    setHeroBackgroundImage
+    setHeroBackgroundImage,
+    uploadFile
   } = useAdmin();
   
   const { toast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
 
   const handleSave = () => {
     toast({
@@ -34,24 +36,60 @@ const HeroEditor = () => {
     });
   };
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const result = e.target?.result as string;
-        setHeroBackgroundImage(result);
-      };
-      reader.readAsDataURL(file);
+      setUploading(true);
+      try {
+        const { data, error } = await uploadFile(file, 'images');
+        if (error) throw error;
+        
+        setHeroBackgroundImage(data.publicUrl);
+        toast({
+          title: "Imagem carregada com sucesso!",
+          description: "A imagem de fundo foi atualizada.",
+        });
+      } catch (error) {
+        toast({
+          title: "Erro ao carregar imagem",
+          description: "Tente novamente.",
+          variant: "destructive"
+        });
+      } finally {
+        setUploading(false);
+      }
     }
   };
 
-  const handleVideoFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleVideoFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setHeroVideoUrl(url);
-      setHeroVideoType('file');
+    if (file && file.type.startsWith('video/')) {
+      setUploading(true);
+      try {
+        const { data, error } = await uploadFile(file, 'videos');
+        if (error) throw error;
+        
+        setHeroVideoUrl(data.publicUrl);
+        setHeroVideoType('file');
+        toast({
+          title: "Vídeo carregado com sucesso!",
+          description: "O vídeo foi salvo e estará disponível após o deploy.",
+        });
+      } catch (error) {
+        toast({
+          title: "Erro ao carregar vídeo",
+          description: "Tente novamente.",
+          variant: "destructive"
+        });
+      } finally {
+        setUploading(false);
+      }
+    } else {
+      toast({
+        title: "Formato inválido",
+        description: "Por favor, selecione um arquivo de vídeo MP4.",
+        variant: "destructive"
+      });
     }
   };
 
@@ -128,17 +166,23 @@ const HeroEditor = () => {
             </div>
           ) : (
             <div>
-              <Label htmlFor="hero-video">Arquivo de Vídeo</Label>
+              <Label htmlFor="hero-video">Arquivo de Vídeo MP4</Label>
               <Input
                 id="hero-video"
                 type="file"
-                accept="video/*"
+                accept="video/mp4"
                 onChange={handleVideoFileUpload}
                 className="mt-1"
+                disabled={uploading}
               />
               <p className="text-sm text-gray-500 mt-1">
-                Selecione um arquivo de vídeo do seu computador
+                Selecione um arquivo MP4. O vídeo será armazenado no Supabase Storage.
               </p>
+              {uploading && (
+                <p className="text-sm text-blue-600 mt-1">
+                  Carregando arquivo...
+                </p>
+              )}
             </div>
           )}
 
@@ -167,6 +211,7 @@ const HeroEditor = () => {
               type="file"
               accept="image/*"
               onChange={handleFileUpload}
+              disabled={uploading}
             />
             <p className="text-sm text-gray-500">
               Selecione uma imagem para o fundo do cabeçalho
