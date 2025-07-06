@@ -47,15 +47,9 @@ export interface AdminContextType {
 
   // Form Submissions
   formSubmissions: FormSubmission[];
-  addFormSubmission: (submission: Omit<FormSubmission, 'id' | 'timestamp'>) => Promise<{ error: any }>;
+  addFormSubmission: (submission: Omit<FormSubmission, 'id' | 'timestamp'>) => void;
 
   // Footer
   footerContent: FooterContent;
-  setFooterContent: (content: FooterContent) => Promise<{ error: any }>;
-
-  // File Upload
-  uploadFile: (file: File, bucket: string, path?: string) => Promise<{ data: any; error: any }>;
-  
-  // Loading state
-  loading: boolean;
+  setFooterContent: (content: FooterContent) => void;
 }

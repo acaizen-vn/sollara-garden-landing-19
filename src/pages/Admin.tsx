@@ -3,35 +3,14 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ArrowLeft, Settings, Image, MessageSquare, Video, FileText, LogOut } from 'lucide-react';
+import { ArrowLeft, Settings, Image, MessageSquare, Video, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '@/hooks/useAuth';
-import { useToast } from '@/hooks/use-toast';
 import HeroEditor from '@/components/admin/HeroEditor';
 import CarouselEditor from '@/components/admin/CarouselEditor';
 import FormSubmissions from '@/components/admin/FormSubmissions';
 import FooterEditor from '@/components/admin/FooterEditor';
 
 const Admin = () => {
-  const { signOut, user } = useAuth();
-  const { toast } = useToast();
-
-  const handleLogout = async () => {
-    try {
-      await signOut();
-      toast({
-        title: "Logout realizado com sucesso!",
-        description: "Você foi desconectado do sistema.",
-      });
-    } catch (error) {
-      toast({
-        title: "Erro no logout",
-        description: "Ocorreu um erro. Tente novamente.",
-        variant: "destructive"
-      });
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="bg-white shadow-sm border-b">
@@ -49,22 +28,8 @@ const Admin = () => {
                 <p className="text-gray-600">Sollara Garden Barra Mansa</p>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <Settings className="w-5 h-5 text-gray-500" />
-                <span className="text-sm text-gray-600">
-                  {user?.email}
-                </span>
-              </div>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleLogout}
-                className="flex items-center space-x-2"
-              >
-                <LogOut className="w-4 h-4" />
-                <span>Sair</span>
-              </Button>
+            <div className="flex items-center space-x-2">
+              <Settings className="w-5 h-5 text-gray-500" />
             </div>
           </div>
         </div>
