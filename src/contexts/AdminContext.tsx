@@ -1,95 +1,69 @@
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { AdminContextType, CarouselImage, FormSubmission, FooterContent } from '@/types/admin';
-import { defaultCarouselImages, defaultFooterContent, defaultHeroData } from '@/data/defaultData';
+import React, { createContext, useContext } from 'react';
+import { AdminContextType } from '@/types/admin';
+import { useSupabaseData } from '@/hooks/useSupabaseData';
 
 const AdminContext = createContext<AdminContextType | undefined>(undefined);
 
 export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Hero Section State
-  const [heroTitle, setHeroTitle] = useState(defaultHeroData.title);
-  const [heroSubtitle, setHeroSubtitle] = useState(defaultHeroData.subtitle);
-  const [heroDescription, setHeroDescription] = useState(defaultHeroData.description);
-  const [heroVideoUrl, setHeroVideoUrl] = useState(defaultHeroData.videoUrl);
-  const [heroVideoType, setHeroVideoType] = useState<'file' | 'youtube'>(defaultHeroData.videoType);
-  const [heroBackgroundImage, setHeroBackgroundImage] = useState(defaultHeroData.backgroundImage);
+  const {
+    loading,
+    heroContent,
+    footerContent,
+    carouselImages,
+    formSubmissions,
+    updateHeroContent,
+    updateFooterContent,
+    addFormSubmission,
+    uploadFile
+  } = useSupabaseData();
 
-  // Footer State
-  const [footerContent, setFooterContent] = useState<FooterContent>(defaultFooterContent);
+  // Hero section methods
+  const setHeroTitle = (title: string) => {
+    updateHeroContent({ title });
+  };
 
-  // Carousel State
-  const [carouselImages, setCarouselImages] = useState<CarouselImage[]>(defaultCarouselImages);
+  const setHeroSubtitle = (subtitle: string) => {
+    updateHeroContent({ subtitle });
+  };
 
-  // Form Submissions State
-  const [formSubmissions, setFormSubmissions] = useState<FormSubmission[]>([]);
+  const setHeroDescription = (description: string) => {
+    updateHeroContent({ description });
+  };
 
-  // Load data from localStorage
-  useEffect(() => {
-    const savedData = localStorage.getItem('adminData');
-    if (savedData) {
-      try {
-        const data = JSON.parse(savedData);
-        if (data.heroTitle) setHeroTitle(data.heroTitle);
-        if (data.heroSubtitle) setHeroSubtitle(data.heroSubtitle);
-        if (data.heroDescription) setHeroDescription(data.heroDescription);
-        if (data.heroVideoUrl) setHeroVideoUrl(data.heroVideoUrl);
-        if (data.heroVideoType) setHeroVideoType(data.heroVideoType);
-        if (data.heroBackgroundImage) setHeroBackgroundImage(data.heroBackgroundImage);
-        if (data.formSubmissions) setFormSubmissions(data.formSubmissions);
-        if (data.footerContent) setFooterContent(data.footerContent);
-      } catch (error) {
-        console.error('Error loading admin data:', error);
-      }
-    }
-  }, []);
+  const setHeroVideoUrl = (video_url: string) => {
+    updateHeroContent({ video_url });
+  };
 
-  // Save data to localStorage whenever state changes
-  useEffect(() => {
-    const adminData = {
-      heroTitle,
-      heroSubtitle,
-      heroDescription,
-      heroVideoUrl,
-      heroVideoType,
-      heroBackgroundImage,
-      carouselImages,
-      formSubmissions,
-      footerContent
-    };
-    localStorage.setItem('adminData', JSON.stringify(adminData));
-  }, [heroTitle, heroSubtitle, heroDescription, heroVideoUrl, heroVideoType, heroBackgroundImage, carouselImages, formSubmissions, footerContent]);
+  const setHeroVideoType = (video_type: 'file' | 'youtube') => {
+    updateHeroContent({ video_type });
+  };
 
-  const addCarouselImage = (image: CarouselImage) => {
-    setCarouselImages(prev => [...prev, image]);
+  const setHeroBackgroundImage = (background_image: string) => {
+    updateHeroContent({ background_image });
+  };
+
+  // Carousel methods (placeholder - will be implemented with real Supabase integration)
+  const addCarouselImage = (image: any) => {
+    console.log('Adding carousel image:', image);
   };
 
   const removeCarouselImage = (id: string) => {
-    setCarouselImages(prev => prev.filter(img => img.id !== id));
+    console.log('Removing carousel image:', id);
   };
 
-  const updateCarouselImage = (id: string, updates: Partial<CarouselImage>) => {
-    setCarouselImages(prev => prev.map(img => 
-      img.id === id ? { ...img, ...updates } : img
-    ));
-  };
-
-  const addFormSubmission = (submission: Omit<FormSubmission, 'id' | 'timestamp'>) => {
-    const newSubmission: FormSubmission = {
-      ...submission,
-      id: Date.now().toString(),
-      timestamp: new Date().toISOString()
-    };
-    setFormSubmissions(prev => [newSubmission, ...prev]);
+  const updateCarouselImage = (id: string, updates: any) => {
+    console.log('Updating carousel image:', id, updates);
   };
 
   return (
     <AdminContext.Provider value={{
-      heroTitle,
-      heroSubtitle,
-      heroDescription,
-      heroVideoUrl,
-      heroVideoType,
-      heroBackgroundImage,
+      heroTitle: heroContent.title,
+      heroSubtitle: heroContent.subtitle,
+      heroDescription: heroContent.description,
+      heroVideoUrl: heroContent.video_url,
+      heroVideoType: heroContent.video_type,
+      heroBackgroundImage: heroContent.background_image,
       setHeroTitle,
       setHeroSubtitle,
       setHeroDescription,
@@ -103,7 +77,9 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       formSubmissions,
       addFormSubmission,
       footerContent,
-      setFooterContent
+      setFooterContent: updateFooterContent,
+      uploadFile,
+      loading
     }}>
       {children}
     </AdminContext.Provider>

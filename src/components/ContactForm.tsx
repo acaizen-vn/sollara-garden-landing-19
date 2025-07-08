@@ -34,26 +34,35 @@ const ContactForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      // Save to Supabase
+      const { error } = await addFormSubmission({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone
+      });
 
-    // Save to admin context
-    addFormSubmission({
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone
-    });
+      if (error) {
+        throw error;
+      }
 
-    toast({
-      title: "Cadastro realizado com sucesso!",
-      description: "Em breve nossa equipe entrará em contato com você.",
-    });
+      toast({
+        title: "Cadastro realizado com sucesso!",
+        description: "Em breve nossa equipe entrará em contato com você.",
+      });
 
-    // Reset form
-    setFormData({ name: '', email: '', phone: '' });
-    setIsSubmitting(false);
-
-    console.log('Lead captured:', formData);
+      // Reset form
+      setFormData({ name: '', email: '', phone: '' });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Erro ao enviar cadastro",
+        description: "Tente novamente em alguns instantes.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
