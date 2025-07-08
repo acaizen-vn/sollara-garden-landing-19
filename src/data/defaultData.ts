@@ -64,27 +64,6 @@ export const defaultCarouselImages: CarouselImage[] = [
     alt: 'Playground infantil com brinquedos modernos e seguros',
     title: 'Playground Infantil',
     description: 'Espaço seguro e divertido para as crianças'
-  },
-  {
-    id: '10',
-    url: '/lovable-uploads/b9d928ac-cb06-4e9d-8c36-d3976397b0aa.png',
-    alt: 'Academia moderna com equipamentos profissionais',
-    title: 'Academia Completa',
-    description: 'Equipamentos modernos para sua qualidade de vida'
-  },
-  {
-    id: '11',
-    url: '/lovable-uploads/9a9a751b-092f-488c-80db-dd64dfc85caa.png',
-    alt: 'Vista aérea panorâmica do condomínio Sollara Garden',
-    title: 'Vista Panorâmica',
-    description: 'Condomínio integrado com a natureza'
-  },
-  {
-    id: '12',
-    url: '/lovable-uploads/9dd8d1b8-c8bf-47de-ab28-2244d3576d82.png',
-    alt: 'Fachadas das casas em linha com arquitetura moderna',
-    title: 'Arquitetura Contemporânea',
-    description: 'Design moderno e funcional para o seu conforto'
   }
 ];
 

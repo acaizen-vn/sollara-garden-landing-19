@@ -21,7 +21,7 @@ const AboutSection = () => {
                 {/* Casas de 1, 2 e 3 Quartos */}
                 <div>
                   <h3 className="font-sf-pro text-2xl font-bold text-luxury-brown mb-4">
-                    Casas não germinadas de 1, 2 e 3 quartos
+                    Casas de 1, 2 e 3 Quartos
                   </h3>
                 </div>
 
@@ -42,7 +42,7 @@ const AboutSection = () => {
                 {/* Segurança */}
                 <div>
                   <h3 className="font-sf-pro text-2xl font-bold text-luxury-brown mb-4">
-                    Portaria moderna e segurança 24h
+                    Segurança 24 Horas
                   </h3>
                 </div>
 
