@@ -18,10 +18,16 @@ const AboutSection = () => {
             <div className="bg-white rounded-2xl p-8 md:p-12 shadow-lg">
               <div className="space-y-8 text-lg text-luxury-brown leading-relaxed">
                 
-                {/* Casas de 1, 2 e 3 Quartos */}
+                {/* Condomínio Privado */}
                 <div>
                   <h3 className="font-sf-pro text-2xl font-bold text-luxury-brown mb-4">
-                    Casas de 1, 2 e 3 Quartos
+                    Condomínio Privado
+                  </h3>
+                </div> 
+                {/* Casas não germinadas de 1, 2 e 3 Quartos */}
+                <div>
+                  <h3 className="font-sf-pro text-2xl font-bold text-luxury-brown mb-4">
+                    Casas não germinadas de 1, 2 e 3 Quartos
                   </h3>
                 </div>
 
@@ -42,7 +48,7 @@ const AboutSection = () => {
                 {/* Segurança */}
                 <div>
                   <h3 className="font-sf-pro text-2xl font-bold text-luxury-brown mb-4">
-                    Segurança 24 Horas
+                    Portaria Moderna & Segurança 24 Horas
                   </h3>
                 </div>
 
