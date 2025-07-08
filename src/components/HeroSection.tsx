@@ -59,7 +59,7 @@ const HeroSection = () => {
           onLoadedData={() => setIsVideoLoaded(true)}
           onError={() => console.log('Error loading video')}
         >
-          <source src="/lovable-uploads/de85cc7c-baa4-4c09-a3f4-be28b3ded2d2.png" type="video/mp4" />
+          <source src="https://drive.google.com/uc?export=download&id=14jFcXML2KS1bawZ2P9V2_j7uoHNHrayp" type="video/mp4" />
         </video>
         
         {/* Overlay with gradients */}
