@@ -30,23 +30,22 @@ const AdminAuth = () => {
     setIsSubmitting(true);
 
     try {
-      const { error } = await signIn(formData.email, formData.password);
-
-      if (error) {
-        toast({
-          title: "Erro no login",
-          description: error.message === 'Invalid login credentials' 
-            ? "Email ou senha incorretos" 
-            : error.message,
-          variant: "destructive"
-        });
-      } else {
+      // Login simples admin/admin
+      if (formData.email === 'admin' && formData.password === 'admin') {
         toast({
           title: "Login realizado com sucesso!",
           description: "Redirecionando para o painel administrativo...",
         });
+        // Simular usuário logado
         navigate('/admin');
+        return;
       }
+
+      toast({
+        title: "Erro no login",
+        description: "Credenciais incorretas. Use: admin / admin",
+        variant: "destructive"
+      });
     } catch (error) {
       toast({
         title: "Erro no login",
@@ -106,12 +105,12 @@ const AdminAuth = () => {
                 <Input
                   id="email"
                   name="email"
-                  type="email"
+                  type="text"
                   value={formData.email}
                   onChange={handleInputChange}
                   required
                   className="mt-1"
-                  placeholder="admin@sollaragarden.com"
+                  placeholder="admin"
                 />
               </div>
 
@@ -142,10 +141,10 @@ const AdminAuth = () => {
             </form>
 
             <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-              <h3 className="text-sm font-medium text-blue-800 mb-2">Contas de Demonstração:</h3>
+              <h3 className="text-sm font-medium text-blue-800 mb-2">Credenciais de Acesso:</h3>
               <div className="text-xs text-blue-700 space-y-1">
-                <p><strong>Admin:</strong> admin@sollaragardens.com / admin123</p>
-                <p><strong>Gerente:</strong> gerente@sollaragardens.com / gerente123</p>
+                <p><strong>Usuário:</strong> admin</p>
+                <p><strong>Senha:</strong> admin</p>
               </div>
             </div>
           </CardContent>
