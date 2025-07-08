@@ -49,18 +49,17 @@ const HeroSection = () => {
     >
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
-        <video
-          ref={videoRef}
-          className="w-full h-full object-cover opacity-80"
-          autoPlay
-          muted
-          loop
-          playsInline
-          onLoadedData={() => setIsVideoLoaded(true)}
-          onError={() => console.log('Error loading video')}
-        >
-          <source src="https://drive.google.com/uc?export=download&id=14jFcXML2KS1bawZ2P9V2_j7uoHNHrayp" type="video/mp4" />
-        </video>
+        <div className="w-full h-full relative">
+          <iframe
+            className="w-full h-full object-cover opacity-80"
+            src="https://www.youtube.com/embed/5yVlGgId68A?autoplay=1&mute=1&loop=1&playlist=5yVlGgId68A&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&disablekb=1&fs=0&cc_load_policy=0&start=0&end=0"
+            title="Sollara Garden Vídeo"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{ pointerEvents: 'none' }}
+          />
+        </div>
         
         {/* Overlay with gradients */}
         <div className="absolute inset-0 bg-gradient-to-br from-luxury-red/30 via-black/50 to-luxury-gold/20" />
