@@ -35,6 +35,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         if (data.heroVideoUrl) setHeroVideoUrl(data.heroVideoUrl);
         if (data.heroVideoType) setHeroVideoType(data.heroVideoType);
         if (data.heroBackgroundImage) setHeroBackgroundImage(data.heroBackgroundImage);
+        if (data.carouselImages) setCarouselImages(data.carouselImages);
         if (data.formSubmissions) setFormSubmissions(data.formSubmissions);
         if (data.footerContent) setFooterContent(data.footerContent);
       } catch (error) {
