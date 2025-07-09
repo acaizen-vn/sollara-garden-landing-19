@@ -64,6 +64,48 @@ export const defaultCarouselImages: CarouselImage[] = [
     alt: 'Playground infantil com brinquedos modernos e seguros',
     title: 'Playground Infantil',
     description: 'Espaço seguro e divertido para as crianças'
+  },
+  {
+    id: '10',
+    url: '/lovable-uploads/ACADEMIA.jpg',
+    alt: 'Academia moderna e completa do condomínio Sollara Garden',
+    title: 'Academia Completa',
+    description: 'Espaço fitness com equipamentos modernos'
+  },
+  {
+    id: '11',
+    url: '/lovable-uploads/PORTAL - 1.jpg',
+    alt: 'Portaria principal do condomínio com design elegante',
+    title: 'Portaria Principal',
+    description: 'Acesso principal com design sofisticado'
+  },
+  {
+    id: '12',
+    url: '/lovable-uploads/PORTAL -3.jpg',
+    alt: 'Vista alternativa da portaria do condomínio',
+    title: 'Entrada Elegante',
+    description: 'Portaria com arquitetura contemporânea'
+  },
+  {
+    id: '13',
+    url: '/lovable-uploads/RUA 05.jpg',
+    alt: 'Rua interna do condomínio com paisagismo',
+    title: 'Ruas Internas',
+    description: 'Vias arborizadas e bem planejadas'
+  },
+  {
+    id: '14',
+    url: '/lovable-uploads/RUA 06.jpg',
+    alt: 'Vista das ruas internas com casas modernas',
+    title: 'Urbanização Premium',
+    description: 'Infraestrutura completa e moderna'
+  },
+  {
+    id: '15',
+    url: '/lovable-uploads/area de lazer 6.jpg',
+    alt: 'Área de lazer adicional com piscina e recreação',
+    title: 'Lazer Completo',
+    description: 'Espaços adicionais para recreação'
   }
 ];
 

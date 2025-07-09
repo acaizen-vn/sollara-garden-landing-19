@@ -3,14 +3,29 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ArrowLeft, Settings, Image, MessageSquare, Video, FileText } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ArrowLeft, Settings, Image, MessageSquare, Video, FileText, LogOut, User } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '@/hooks/useAuth';
+import { useToast } from '@/hooks/use-toast';
 import HeroEditor from '@/components/admin/HeroEditor';
 import CarouselEditor from '@/components/admin/CarouselEditor';
 import FormSubmissions from '@/components/admin/FormSubmissions';
 import FooterEditor from '@/components/admin/FooterEditor';
 
 const Admin = () => {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const handleLogout = () => {
+    logout();
+    toast({
+      title: "Logout realizado com sucesso!",
+      description: "Você foi desconectado do painel administrativo.",
+    });
+    navigate('/admin/login');
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="bg-white shadow-sm border-b">
@@ -29,7 +44,14 @@ const Admin = () => {
               </div>
             </div>
             <div className="flex items-center space-x-2">
-              <Settings className="w-5 h-5 text-gray-500" />
+              <div className="flex items-center space-x-2 text-sm text-gray-600">
+                <User className="w-4 h-4" />
+                <span>admin</span>
+              </div>
+              <Button variant="outline" size="sm" onClick={handleLogout}>
+                <LogOut className="w-4 h-4 mr-2" />
+                Sair
+              </Button>
             </div>
           </div>
         </div>
