@@ -34,26 +34,56 @@ const ContactForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      // Enviar para API PostgreSQL
+      const apiUrl = import.meta.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001';
+      const response = await fetch(`${apiUrl}/api/leads`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: `Lead capturado via formulário da landing page - ${new Date().toLocaleString()}`
+        })
+      });
 
-    // Save to admin context
-    addFormSubmission({
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone
-    });
+      if (!response.ok) {
+        throw new Error(`Erro ${response.status}: ${response.statusText}`);
+      }
 
-    toast({
-      title: "Cadastro realizado com sucesso!",
-      description: "Em breve nossa equipe entrará em contato com você.",
-    });
+      const result = await response.json();
+      console.log('✅ Lead salvo na API:', result);
 
-    // Reset form
-    setFormData({ name: '', email: '', phone: '' });
-    setIsSubmitting(false);
+      toast({
+        title: "Cadastro realizado com sucesso!",
+        description: "Em breve nossa equipe entrará em contato com você.",
+      });
 
-    console.log('Lead captured:', formData);
+      // Reset form
+      setFormData({ name: '', email: '', phone: '' });
+      
+    } catch (error) {
+      console.error('❌ Erro ao salvar lead:', error);
+      
+      // Fallback: salvar no localStorage como backup
+      addFormSubmission({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone
+      });
+
+      toast({
+        title: "Cadastro realizado!",
+        description: "Seus dados foram registrados. Nossa equipe entrará em contato.",
+      });
+
+      setFormData({ name: '', email: '', phone: '' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

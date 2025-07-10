@@ -23,21 +23,31 @@ const AdminLogin = () => {
     return <Navigate to="/admin" replace />;
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    if (login(username, password)) {
+    try {
+      const success = await login(username, password);
+      if (success) {
+        toast({
+          title: "Login realizado com sucesso!",
+          description: "Bem-vindo ao painel administrativo.",
+        });
+        navigate('/admin');
+      } else {
+        setError('Login ou senha incorretos');
+        toast({
+          title: "Erro no login",
+          description: "Login ou senha incorretos.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      setError('Erro ao conectar com o servidor');
       toast({
-        title: "Login realizado com sucesso!",
-        description: "Bem-vindo ao painel administrativo.",
-      });
-      navigate('/admin');
-    } else {
-      setError('Login ou senha incorretos');
-      toast({
-        title: "Erro no login",
-        description: "Login ou senha incorretos.",
+        title: "Erro de conexão",
+        description: "Não foi possível conectar ao servidor.",
         variant: "destructive",
       });
     }
