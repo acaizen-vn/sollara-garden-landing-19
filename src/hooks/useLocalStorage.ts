@@ -1,26 +1,49 @@
-
 import { useState, useEffect } from 'react';
 
-export const useLocalStorage = <T>(key: string, initialValue: T) => {
-  const [storedValue, setStoredValue] = useState<T>(() => {
-    try {
-      const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      console.error(`Error loading ${key} from localStorage:`, error);
-      return initialValue;
-    }
-  });
+export const useBackendStorage = <T>(endpoint: string, initialValue: T) => {
+  const [storedValue, setStoredValue] = useState<T>(initialValue);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const setValue = (value: T | ((val: T) => T)) => {
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await fetch(endpoint);
+        if (!res.ok) throw new Error(`Erro ao carregar dados: ${res.statusText}`);
+        const data = await res.json();
+        setStoredValue(data);
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, [endpoint]);
+
+  const setValue = async (value: T | ((val: T) => T)) => {
+    setLoading(true);
+    setError(null);
     try {
       const valueToStore = value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
-    } catch (error) {
-      console.error(`Error saving ${key} to localStorage:`, error);
+      const res = await fetch(endpoint, {
+        method: 'POST', // ajuste para PUT ou POST conforme sua API
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(valueToStore),
+      });
+      if (!res.ok) throw new Error(`Erro ao salvar dados: ${res.statusText}`);
+      const savedData = await res.json();
+      setStoredValue(savedData);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  return [storedValue, setValue] as const;
+  return [storedValue, setValue, loading, error] as const;
 };
